@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 import Surprise from "../pages/home/components/Surprise";
 import SearchActivitiesView from "../pages/home/components/SearchActivitiesView";
+import ActivityRecommendationGen from "../pages/activity_recommendation/ActivityRecommendationGen";
 
 const Loadable = (Component: React.ElementType) => (props: any) => {
   return (
@@ -48,10 +49,19 @@ export default function Router() {
           ],
         },
         {
-          path: "/activity/recommendation",
-          element: <ActivityRecommendation />,
+          path: "/activity/",
+          children: [
+            {
+              path: "recommendation/:id",
+              element: <ActivityRecommendation />,
+            },
+            {
+              path: "recommendation",
+              element: <ActivityRecommendationGen />,
+            },
+            { path: "result/:activityId", element: <ActivityResult /> },
+          ],
         },
-        { path: "/activity/result/:activityId", element: <ActivityResult /> },
       ],
     },
     {

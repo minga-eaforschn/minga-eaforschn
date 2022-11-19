@@ -3776,6 +3776,13 @@ export type Uuid_Comparison_Exp = {
 
 export type ActivityFragment = { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration_in_hours?: any | null, estimated_pricing?: any | null };
 
+export type GetActivitiesQueryVariables = Exact<{
+  excludedIds: Array<Scalars['uuid']> | Scalars['uuid'];
+}>;
+
+
+export type GetActivitiesQuery = { __typename?: 'query_root', activity: Array<{ __typename?: 'activity', id: any }> };
+
 export type GetActivityQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
@@ -3817,6 +3824,41 @@ export const UserFragmentDoc = gql`
   total_xp
 }
     `;
+export const GetActivitiesDocument = gql`
+    query GetActivities($excludedIds: [uuid!]!) {
+  activity(where: {id: {_nin: $excludedIds}}) {
+    id
+  }
+}
+    `;
+
+/**
+ * __useGetActivitiesQuery__
+ *
+ * To run a query within a React component, call `useGetActivitiesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetActivitiesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetActivitiesQuery({
+ *   variables: {
+ *      excludedIds: // value for 'excludedIds'
+ *   },
+ * });
+ */
+export function useGetActivitiesQuery(baseOptions: Apollo.QueryHookOptions<GetActivitiesQuery, GetActivitiesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetActivitiesQuery, GetActivitiesQueryVariables>(GetActivitiesDocument, options);
+      }
+export function useGetActivitiesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetActivitiesQuery, GetActivitiesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetActivitiesQuery, GetActivitiesQueryVariables>(GetActivitiesDocument, options);
+        }
+export type GetActivitiesQueryHookResult = ReturnType<typeof useGetActivitiesQuery>;
+export type GetActivitiesLazyQueryHookResult = ReturnType<typeof useGetActivitiesLazyQuery>;
+export type GetActivitiesQueryResult = Apollo.QueryResult<GetActivitiesQuery, GetActivitiesQueryVariables>;
 export const GetActivityDocument = gql`
     query GetActivity($id: uuid!) {
   activity_by_pk(id: $id) {

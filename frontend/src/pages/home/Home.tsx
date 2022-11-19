@@ -13,6 +13,7 @@ export default function Home() {
   const navigate = useNavigate();
   useEffect(() => {
     if (value && value !== initialPath) {
+      console.log(value);
       navigate(`/home/${value}`);
     }
   }, [value]);

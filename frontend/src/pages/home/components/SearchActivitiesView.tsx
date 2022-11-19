@@ -43,6 +43,7 @@ const SearchActivitiesView = () => {
       query: `%${searchQuery}%`,
     },
   });
+  const activities = data?.activity;
   return (
     <Box>
       <SearchBar
@@ -51,7 +52,7 @@ const SearchActivitiesView = () => {
         }}
       />
       <Box height={5} />
-      {loading || error || data == null ? (
+      {loading || error || activities == null ? (
         <Box>
           <CircularProgress />
         </Box>
@@ -62,12 +63,13 @@ const SearchActivitiesView = () => {
             paddingY: "5px",
           }}
         >
-          {data.activity.map((activity) => (
+          {activities.map((activity, index) => (
             <Card
               key={activity.id}
               sx={{
                 padding: "20px",
                 marginY: "8px",
+                marginBottom: index == activities.length - 1 ? "70px" : 0,
               }}
             >
               <Box display="flex" alignItems="center">

@@ -1,18 +1,20 @@
 import { useGetActivityQuery } from "../../generated/graphql";
 import Center from "../../components/Center";
-import { Card, CircularProgress, Container } from "@mui/material";
+import { Card, CircularProgress, Container, useTheme } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import pixlkindl from "../../assets/pixlkindl.png";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import PixlKindl from "./components/PixlKindl";
 
 const ActivityRecommendation = () => {
+  const params = useParams();
   const { data, loading, error, refetch } = useGetActivityQuery({
     variables: {
-      id: "96e4473d-d41e-4a52-94dc-7f1d97dd7cbc",
+      id: params.id,
     },
   });
+  const theme = useTheme();
   const navigate = useNavigate();
   if (loading) {
     return (
@@ -21,14 +23,15 @@ const ActivityRecommendation = () => {
       </Center>
     );
   }
-
   const activity = data?.activity_by_pk;
   if (!activity || error) {
     return (
       <Center>
-        <Typography>Could not load activity...</Typography>
-        <Box height="5px" />
-        <Button onClick={() => refetch()}>Try again</Button>
+        <Box display="flex" alignItems={"center"} flexDirection={"column"}>
+          <Typography>Could not load activity...</Typography>
+          <Box height="5px" />
+          <Button onClick={() => refetch()}>Try again</Button>
+        </Box>
       </Center>
     );
   }
@@ -42,13 +45,17 @@ const ActivityRecommendation = () => {
         alignItems: "center",
       }}
     >
-      <Box>
+      <Box display="flex" flexDirection={"column"} width={"100%"}>
         <Box
           component="img"
-          maxHeight="60vh"
-          maxWidth="100vw"
+          height="300px"
           src={activity.image_url}
           alt=""
+          sx={{
+            marginTop: "16px",
+            objectFit: "cover",
+            borderRadius: "20px",
+          }}
         />
         <Card
           elevation={0}
@@ -58,10 +65,15 @@ const ActivityRecommendation = () => {
           }}
         >
           <Typography variant="h5">{activity.name}</Typography>
-          <Box display={"flex"} justifyContent={"space-between"}>
+          <Box display={"flex"}>
             <Typography>{activity.short_description}</Typography>
             {activity.gainable_xp != null && (
-              <Typography>+{activity.gainable_xp} XP</Typography>
+              <>
+                <Box width="10px" />
+                <Typography color={theme.palette.secondary.main}>
+                  +{activity.gainable_xp} XP
+                </Typography>
+              </>
             )}
           </Box>
           {activity.estimated_duration_in_hours != null && (
@@ -81,7 +93,7 @@ const ActivityRecommendation = () => {
           direction="left"
           instruction="No, thanks"
           onInteraction={() => {
-            refetch();
+            navigate("/activity/recommendation");
           }}
         />
         <PixlKindl
@@ -92,46 +104,6 @@ const ActivityRecommendation = () => {
         />
       </Box>
     </Container>
-  );
-};
-
-interface PixlKindlProps {
-  direction?: "left" | "right";
-  instruction: string;
-  onInteraction: () => void;
-}
-
-const PixlKindl: React.FC<PixlKindlProps> = ({
-  direction,
-  instruction,
-  onInteraction,
-}) => {
-  direction ??= "right";
-  return (
-    <Box>
-      <Box
-        display={"flex"}
-        justifyContent={"center"}
-        alignItems="center"
-        flexDirection="column"
-      >
-        <Box
-          width="50%"
-          component="img"
-          src={pixlkindl}
-          sx={{
-            transform: `scaleX(${direction === "left" ? -1 : 1})`,
-          }}
-        />
-        <Box height={5} />
-        <Button
-          onClick={onInteraction}
-          variant={direction === "left" ? "outlined" : "contained"}
-        >
-          {instruction}
-        </Button>
-      </Box>
-    </Box>
   );
 };
 

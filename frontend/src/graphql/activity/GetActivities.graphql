@@ -1,0 +1,7 @@
+query GetActivities($excludedIds: [uuid!]!) {
+    activity (where: {
+        id: {_nin: $excludedIds}
+    }){
+        id
+    }
+}

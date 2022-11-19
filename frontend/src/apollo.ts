@@ -1,59 +1,72 @@
-import {ApolloClient, ApolloLink, concat, HttpLink, InMemoryCache, split} from '@apollo/client'
-import {WebSocketLink} from '@apollo/client/link/ws'
-import {getMainDefinition} from '@apollo/client/utilities'
+import {
+  ApolloClient,
+  ApolloLink,
+  concat,
+  HttpLink,
+  InMemoryCache,
+  split,
+} from "@apollo/client";
+import { WebSocketLink } from "@apollo/client/link/ws";
+import { getMainDefinition } from "@apollo/client/utilities";
 
 function loadHeaders() {
-  return {'x-hasura-admin-secret': 'myadminsecretkey'}
+  return { "x-hasura-admin-secret": "myadminsecretkey" };
 }
 
-const httpUri = process.env.REACT_APP_GRAPHQL_ENDPOINT ? `${process.env.REACT_APP_GRAPHQL_ENDPOINT}` : `https://api.stephan.vm.selectcode.io/v1/graphql`
-const wsUri = process.env.REACT_APP_GRAPHQL_WS_ENDPOINT ? `${process.env.REACT_APP_GRAPHQL_WS_ENDPOINT.replace('http', 'ws')}` : `ws://localhost:8080/v1/graphql`
+const httpUri = process.env.REACT_APP_GRAPHQL_ENDPOINT
+  ? `${process.env.REACT_APP_GRAPHQL_ENDPOINT}`
+  : `https://api.stephan.vm.selectcode.io/v1/graphql`;
+const wsUri = process.env.REACT_APP_GRAPHQL_WS_ENDPOINT
+  ? `${process.env.REACT_APP_GRAPHQL_WS_ENDPOINT.replace("http", "ws")}`
+  : `ws://localhost:8080/v1/graphql`;
 
 const httpLink = new HttpLink({
   uri: httpUri,
-})
+});
 const wsLink = new WebSocketLink({
   uri: wsUri,
   options: {
     reconnect: true,
     lazy: true,
     connectionParams: {
-      headers: loadHeaders()
-    }
-  }
-})
+      headers: loadHeaders(),
+    },
+  },
+});
 
 const errorLink = new ApolloLink((operation, forward) => {
-  return forward(operation).map(({data, errors}) => {
+  return forward(operation).map(({ data, errors }) => {
     if (errors) {
       errors.forEach((error: any) => {
-        if (!error) return
-        console.log(error)
+        if (!error) return;
+        console.log(error);
         //TODO handle GraphQl errors here
-      })
+      });
     }
-    return {data, errors}
-  })
-})
+    return { data, errors };
+  });
+});
 
 const splitLink = split(
-  ({query}) => {
-    const definition = getMainDefinition(query)
-    return definition.kind === 'OperationDefinition' && definition.operation === 'subscription'
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === "OperationDefinition" &&
+      definition.operation === "subscription"
+    );
   },
   wsLink,
-  concat(errorLink, httpLink),
-)
+  concat(errorLink, httpLink)
+);
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext({
-    headers: loadHeaders()
-  })
-  return forward(operation)
-})
-
+    headers: loadHeaders(),
+  });
+  return forward(operation);
+});
 
 export const client = new ApolloClient({
   link: concat(authMiddleware, splitLink),
-  cache: new InMemoryCache()
-})
+  cache: new InMemoryCache(),
+});
