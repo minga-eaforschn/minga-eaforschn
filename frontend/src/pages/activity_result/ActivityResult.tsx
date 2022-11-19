@@ -164,9 +164,7 @@ const ActivityResult: React.FC = (props) => {
           >
             <Button
               onClick={() => {
-                navigate("/activity/recommendation", {
-                  replace: true,
-                });
+                navigate(-1);
               }}
               variant="outlined"
             >

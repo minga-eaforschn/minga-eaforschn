@@ -1,9 +1,10 @@
 import Box from "@mui/material/Box";
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
-import { Archive, HomeMax, Search } from "@mui/icons-material";
+import { Archive, Search } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router";
+import logo from "../../assets/MingaEaforschnLogo.jpg";
 
 export default function Home() {
   const location = useLocation();
@@ -42,7 +43,7 @@ export default function Home() {
           <BottomNavigationAction
             value="surprise"
             label="Home"
-            icon={<HomeMax />}
+            icon={<Box component={"img"} src={logo} height={30} width={30} />}
           />
           <BottomNavigationAction
             value="search"

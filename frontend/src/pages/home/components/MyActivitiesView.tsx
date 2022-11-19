@@ -136,7 +136,7 @@ const MyActivitiesView = () => {
                       </Box>
                     </Box>
                   </Box>
-                  {userActivity.status === Activity_Status_Enum.Outstanding && (
+                  {userActivity.status === Activity_Status_Enum.Ongoing && (
                     <>
                       <Box height="10px" />
 

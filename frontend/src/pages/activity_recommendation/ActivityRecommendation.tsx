@@ -54,7 +54,7 @@ const ActivityRecommendation = () => {
       >
         <Box
           component="img"
-          height="400px"
+          maxHeight="400px"
           maxWidth={"sm"}
           src={activity.image_url}
           alt=""
@@ -68,12 +68,12 @@ const ActivityRecommendation = () => {
         <Card
           elevation={0}
           sx={{
-            borderRadius: "20px 20px 0 0",
-            padding: "20px",
+            maxWidth: "sm",
+            paddingY: "16px",
           }}
         >
           <Typography variant="h5">{activity.name}</Typography>
-          <Box display={"flex"}>
+          <Box display={"flex"} justifyContent={"space-between"}>
             <Typography>{activity.short_description}</Typography>
             {activity.gainable_xp != null && (
               <>

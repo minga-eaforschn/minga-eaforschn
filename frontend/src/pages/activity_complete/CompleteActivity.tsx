@@ -6,6 +6,8 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { UploadFile } from "@mui/icons-material";
+import MuenchnerKindl from "../../components/MuenchnerKindl";
+import SpeechBubble from "../../components/SpeechBubble";
 
 const CompleteActivity = () => {
   const { activityId } = useParams<{ activityId: string }>();
@@ -33,6 +35,7 @@ const CompleteActivity = () => {
       flexDirection={"column"}
       alignItems={"center"}
       justifyContent="center"
+      position={"relative"}
     >
       <Card
         sx={{
@@ -87,6 +90,20 @@ const CompleteActivity = () => {
           </Button>
         </Box>
       </Card>
+      <Box position={"absolute"} bottom={40} left={40} right={0}>
+        <Box width={"10%"} position={"relative"}>
+          <MuenchnerKindl />
+          <SpeechBubble
+            sx={{
+              position: "absolute",
+              left: "83%",
+            }}
+            text={
+              "Grias di, congratulations on completing your first challenge! I'm really proud of you."
+            }
+          />
+        </Box>
+      </Box>
     </Box>
   );
 };
