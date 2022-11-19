@@ -1,0 +1,6 @@
+fragment User on user {
+    id
+    name
+    image_url
+    total_xp
+}

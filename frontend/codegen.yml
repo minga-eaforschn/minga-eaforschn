@@ -1,6 +1,6 @@
 overwrite: true
 schema:
-  - ${REACT_APP_GRAPHQL_ENDPOINT:"https://api.stephan.vm.selectcode.io/v1/graphql"}"}:
+  - ${REACT_APP_GRAPHQL_ENDPOINT:"https://api.stephan.vm.selectcode.io/v1/graphql"}:
       headers:
         "X-Hasura-Admin-Secret": "myadminsecretkey"
 documents: "src/**/*.graphql"

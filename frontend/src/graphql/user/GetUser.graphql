@@ -1,0 +1,5 @@
+query GetUser {
+    user_by_pk(id: 1) {
+        ...User
+    }
+}
