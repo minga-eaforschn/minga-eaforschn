@@ -7,25 +7,31 @@ import SpeechBubble from "../../../components/SpeechBubble";
 const Surprise = () => {
   const navigate = useNavigate();
   return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      minHeight="100vh"
-    >
-      <Box>
-        <MuenchnerKindl></MuenchnerKindl>
-        <SpeechBubble
-          text={"Do you have plans for today?"}
-          sx={{ width: "60%" }}
-        ></SpeechBubble>
+    <Box>
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <Box sx={{ paddingTop: "45%", paddingLeft: "2rem" }}>
+          <MuenchnerKindl sx={{ width: "55%" }}></MuenchnerKindl>
+          <SpeechBubble
+            text={"Do you have plans for today?"}
+            sx={{ width: "60%", left: "73%" }}
+          ></SpeechBubble>
+        </Box>
       </Box>
-      <Button
-        onClick={() => navigate("/activity/recommendation")}
-        variant="contained"
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          paddingTop: "2rem",
+        }}
       >
-        Surprise me!
-      </Button>
+        <Button
+          onClick={() => navigate("/activity/recommendation")}
+          variant="contained"
+        >
+          Surprise me!
+        </Button>
+      </Box>
     </Box>
   );
 };
