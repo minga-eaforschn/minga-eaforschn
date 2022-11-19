@@ -8,4 +8,8 @@ fragment Activity on activity {
     estimated_duration_in_hours
     estimated_pricing
     coordinates
+    likes {
+        id
+        user_id
+    }
 }
