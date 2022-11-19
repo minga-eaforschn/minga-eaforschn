@@ -3,9 +3,10 @@ import React from "react";
 import { useNavigate, useParams } from "react-router";
 import { useGetActivityQuery } from "../../generated/graphql";
 import Center from "../../components/Center";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { AccessTime, Payments, Scoreboard } from "@mui/icons-material";
 
 const ActivityResult: React.FC = (props) => {
   const { activityId } = useParams();
@@ -22,6 +23,7 @@ const ActivityResult: React.FC = (props) => {
       </Center>
     );
   }
+
   if (activityId === undefined) {
     return (
       <Box>
@@ -29,6 +31,7 @@ const ActivityResult: React.FC = (props) => {
       </Box>
     );
   }
+
   const activity = data?.activity_by_pk;
   if (!activity || error) {
     return (
@@ -39,17 +42,34 @@ const ActivityResult: React.FC = (props) => {
       </Center>
     );
   }
+
+  const coordinates = activity.coordinates;
+  const lat = coordinates["lat"];
+  const lon = coordinates["lon"];
+
+  const mapUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
+
   return (
     <Box>
-      <Box
-        component="img"
-        src={"https://media.giphy.com/media/3o7TKSjRrfIPjeUGDK/giphy.gif"}
-        sx={{
-          width: "100%",
-          height: "100%",
-        }}
-      />
       <Typography variant="h5">{activity.name}</Typography>
+      <img src={activity.image_url} />
+      <Stack direction="row" spacing={1}>
+        <AccessTime />
+        <Typography variant="body2">
+          {activity.estimated_duration_in_hours} hours
+        </Typography>
+      </Stack>
+      <Stack direction="row" spacing={1}>
+        <Payments />
+        <Typography variant="body2">
+          {activity.estimated_pricing} euros
+        </Typography>
+      </Stack>
+      <Stack direction="row" spacing={1}>
+        <Scoreboard />
+        <Typography variant="body2">{activity.gainable_xp} MP</Typography>
+      </Stack>
+      <Button href={mapUrl}>Zu Google Maps</Button>
     </Box>
   );
 };

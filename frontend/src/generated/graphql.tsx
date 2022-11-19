@@ -3776,26 +3776,14 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
-export type ActivityFragment = { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration_in_hours?: any | null, estimated_pricing?: any | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> };
-
-export type GetActivitiesQueryVariables = Exact<{
-  excludedIds: Array<Scalars['uuid']> | Scalars['uuid'];
-}>;
-
-
-export type GetActivitiesQuery = { __typename?: 'query_root', activity: Array<{ __typename?: 'activity', id: any }> };
+export type ActivityFragment = { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration_in_hours?: any | null, estimated_pricing?: any | null, coordinates?: any | null };
 
 export type GetActivityQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
 
 
-export type GetActivityQuery = { __typename?: 'query_root', activity_by_pk?: { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration_in_hours?: any | null, estimated_pricing?: any | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> } | null };
-
-export type GetUserActivitiesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetUserActivitiesQuery = { __typename?: 'query_root', user_activity: Array<{ __typename?: 'user_activity', due_to: any, status: Activity_Status_Enum, activity: { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration_in_hours?: any | null, estimated_pricing?: any | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> } }> };
+export type GetActivityQuery = { __typename?: 'query_root', activity_by_pk?: { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration_in_hours?: any | null, estimated_pricing?: any | null, coordinates?: any | null } | null };
 
 export type SearchActivitiesQueryVariables = Exact<{
   query: Scalars['String'];
@@ -3821,10 +3809,7 @@ export const ActivityFragmentDoc = gql`
   gainable_xp
   estimated_duration_in_hours
   estimated_pricing
-  likes {
-    id
-    user_id
-  }
+  coordinates
 }
     `;
 export const UserFragmentDoc = gql`
