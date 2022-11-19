@@ -11,9 +11,15 @@ export default function Home() {
   const initialPath = split[split.length - 1];
   const [value, setValue] = useState(initialPath);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (initialPath === "home" || initialPath === "") {
+      setValue("surprise");
+    }
+  }, []);
+
   useEffect(() => {
     if (value && value !== initialPath) {
-      console.log(value);
       navigate(`/home/${value}`);
     }
   }, [value]);

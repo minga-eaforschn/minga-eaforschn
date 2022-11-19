@@ -1,0 +1,12 @@
+query GetUserActivities {
+    user_activity(where: {user_id: {
+        _eq: 1
+    }}) {
+        due_to
+        status
+        activity {
+            ...Activity
+        }
+    }
+
+}

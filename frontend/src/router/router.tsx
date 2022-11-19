@@ -3,6 +3,7 @@ import { Navigate, useRoutes } from "react-router-dom";
 import Surprise from "../pages/home/components/Surprise";
 import SearchActivitiesView from "../pages/home/components/SearchActivitiesView";
 import ActivityRecommendationGen from "../pages/activity_recommendation/ActivityRecommendationGen";
+import MyActivitiesView from "../pages/home/components/MyActivitiesView";
 
 const Loadable = (Component: React.ElementType) => (props: any) => {
   return (
@@ -32,8 +33,6 @@ export default function Router() {
           path: "/home",
           element: <Home />,
           children: [
-            { element: <Navigate to="surprise" replace />, index: true },
-
             {
               path: "surprise",
               element: <Surprise />,
@@ -44,7 +43,7 @@ export default function Router() {
             },
             {
               path: "activities",
-              element: <Surprise />,
+              element: <MyActivitiesView />,
             },
           ],
         },

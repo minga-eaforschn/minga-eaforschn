@@ -38,6 +38,7 @@ const ActivityRecommendation = () => {
   return (
     <Container
       sx={{
+        maxWidth: "sm",
         height: "100vh",
         display: "flex",
         flexDirection: "column",
@@ -48,12 +49,13 @@ const ActivityRecommendation = () => {
       <Box display="flex" flexDirection={"column"} width={"100%"}>
         <Box
           component="img"
-          height="300px"
+          height="400px"
           src={activity.image_url}
           alt=""
           sx={{
             marginTop: "16px",
             objectFit: "cover",
+            objectPosition: "center",
             borderRadius: "20px",
           }}
         />

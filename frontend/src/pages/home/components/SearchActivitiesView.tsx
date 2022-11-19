@@ -10,6 +10,9 @@ import {
 import React from "react";
 import { useSearchActivitiesQuery } from "../../../generated/graphql";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import { PlayArrow } from "@mui/icons-material";
+import { useNavigate } from "react-router";
 
 interface SearchBarProps {
   setSearchQuery: (searchQuery: string) => void;
@@ -44,6 +47,7 @@ const SearchActivitiesView = () => {
     },
   });
   const activities = data?.activity;
+  const navigate = useNavigate();
   return (
     <Box>
       <SearchBar
@@ -74,13 +78,23 @@ const SearchActivitiesView = () => {
             >
               <Box display="flex" alignItems="center">
                 <Avatar src={activity.image_url} />
-                <Box width={10} />
+                <Box width={20} />
                 <Box>
                   <Typography>{activity.name}</Typography>
                   <Typography variant="subtitle2">
                     {activity.short_description}
                   </Typography>
                 </Box>
+              </Box>
+              <Box width={"10px"} />
+              <Box display={"flex"} justifyContent={"end"}>
+                <Button
+                  onClick={() => {
+                    navigate("/activity/result/" + activity.id);
+                  }}
+                >
+                  Start challenge {<PlayArrow />}
+                </Button>
               </Box>
             </Card>
           ))}

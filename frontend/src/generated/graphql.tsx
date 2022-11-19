@@ -3790,6 +3790,11 @@ export type GetActivityQueryVariables = Exact<{
 
 export type GetActivityQuery = { __typename?: 'query_root', activity_by_pk?: { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration_in_hours?: any | null, estimated_pricing?: any | null } | null };
 
+export type GetUserActivitiesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUserActivitiesQuery = { __typename?: 'query_root', user_activity: Array<{ __typename?: 'user_activity', due_to: any, status: Activity_Status_Enum, activity: { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration_in_hours?: any | null, estimated_pricing?: any | null } }> };
+
 export type SearchActivitiesQueryVariables = Exact<{
   query: Scalars['String'];
 }>;
@@ -3894,6 +3899,44 @@ export function useGetActivityLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type GetActivityQueryHookResult = ReturnType<typeof useGetActivityQuery>;
 export type GetActivityLazyQueryHookResult = ReturnType<typeof useGetActivityLazyQuery>;
 export type GetActivityQueryResult = Apollo.QueryResult<GetActivityQuery, GetActivityQueryVariables>;
+export const GetUserActivitiesDocument = gql`
+    query GetUserActivities {
+  user_activity(where: {user_id: {_eq: 1}}) {
+    due_to
+    status
+    activity {
+      ...Activity
+    }
+  }
+}
+    ${ActivityFragmentDoc}`;
+
+/**
+ * __useGetUserActivitiesQuery__
+ *
+ * To run a query within a React component, call `useGetUserActivitiesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserActivitiesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserActivitiesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetUserActivitiesQuery(baseOptions?: Apollo.QueryHookOptions<GetUserActivitiesQuery, GetUserActivitiesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetUserActivitiesQuery, GetUserActivitiesQueryVariables>(GetUserActivitiesDocument, options);
+      }
+export function useGetUserActivitiesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserActivitiesQuery, GetUserActivitiesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetUserActivitiesQuery, GetUserActivitiesQueryVariables>(GetUserActivitiesDocument, options);
+        }
+export type GetUserActivitiesQueryHookResult = ReturnType<typeof useGetUserActivitiesQuery>;
+export type GetUserActivitiesLazyQueryHookResult = ReturnType<typeof useGetUserActivitiesLazyQuery>;
+export type GetUserActivitiesQueryResult = Apollo.QueryResult<GetUserActivitiesQuery, GetUserActivitiesQueryVariables>;
 export const SearchActivitiesDocument = gql`
     query SearchActivities($query: String!) {
   activity(where: {name: {_ilike: $query}}) {

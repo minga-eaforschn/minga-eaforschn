@@ -17,6 +17,9 @@ declare module "@mui/material/styles" {
 }
 
 export const theme = createTheme({
+  shape: {
+    borderRadius: 20,
+  },
   palette: {
     primary: {
       main: "#2045A7",
