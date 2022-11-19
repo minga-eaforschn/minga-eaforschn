@@ -1,17 +1,24 @@
 import Box from "@mui/material/Box";
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import { Archive, HomeMax, Search } from "@mui/icons-material";
-import { useState } from "react";
-import Surprise from "./components/Surprise";
-import SearchActivitiesView from "./components/SearchActivitiesView";
+import { useEffect, useState } from "react";
+import { Outlet, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 export default function Home() {
-  const [value, setValue] = useState(0);
+  const location = useLocation();
+  const split = location.pathname.split("/");
+  const initialPath = split[split.length - 1];
+  const [value, setValue] = useState(initialPath);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (value && value !== initialPath) {
+      navigate(`/home/${value}`);
+    }
+  }, [value]);
   return (
     <Box>
-      {value === 0 && <Surprise />}
-      {value === 1 && <SearchActivitiesView />}
-      {value === 2 && <Surprise />}
+      <Outlet />
       <Paper
         sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
         elevation={3}
@@ -23,9 +30,21 @@ export default function Home() {
             setValue(newValue);
           }}
         >
-          <BottomNavigationAction label="Home" icon={<HomeMax />} />
-          <BottomNavigationAction label="Search" icon={<Search />} />
-          <BottomNavigationAction label="Archive" icon={<Archive />} />
+          <BottomNavigationAction
+            value="surprise"
+            label="Home"
+            icon={<HomeMax />}
+          />
+          <BottomNavigationAction
+            value="search"
+            label="Search"
+            icon={<Search />}
+          />
+          <BottomNavigationAction
+            value="activities"
+            label="Archive"
+            icon={<Archive />}
+          />
         </BottomNavigation>
       </Paper>
     </Box>

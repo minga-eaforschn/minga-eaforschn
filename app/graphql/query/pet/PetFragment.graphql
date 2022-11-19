@@ -1,4 +1,0 @@
-fragment Pet on pet {
-    id
-    name
-}
