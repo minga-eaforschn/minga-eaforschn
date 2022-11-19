@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import pixlkindl from "../../../assets/MuenchnerKindlPicture.jpeg";
+import pixlkindl from "../../../assets/MuenchnerKindlPicture.png";
 import Button from "@mui/material/Button";
 
 interface PixlKindlProps {

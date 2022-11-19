@@ -1,5 +1,5 @@
-import { Box, CircularProgress } from "@mui/material";
-import MuenchnerKindlImage from "../assets/MuenchnerKindlPicture.jpeg";
+import { Box } from "@mui/material";
+import MuenchnerKindlImage from "../assets/MuenchnerKindlPicture.png";
 
 // Speech Bubbles inspired by https://freefrontend.com/css-speech-bubbles/
 const MuenchnerKindl = (kindlProps: { sx?: any }) => {
