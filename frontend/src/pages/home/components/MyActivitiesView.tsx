@@ -3,26 +3,23 @@ import {
   useGetUserActivitiesQuery,
 } from "../../../generated/graphql";
 import moment from "moment";
-import {
-  Avatar,
-  Box,
-  Card,
-  CircularProgress,
-  Icon,
-  List,
-  useTheme,
-} from "@mui/material";
+import { Avatar, Box, Card, CircularProgress, Icon, List } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import React from "react";
 import AppBar from "@mui/material/AppBar";
 import {
   CalendarTodayOutlined,
   CheckCircle,
+  Done,
   PendingActions,
   SvgIconComponent,
+  SyncLock,
+  TimerOutlined,
 } from "@mui/icons-material";
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router";
 
-const getColor = (status: Activity_Status_Enum) => {
+const getIconColor = (status: Activity_Status_Enum) => {
   switch (status) {
     case Activity_Status_Enum.Done:
       return "success";
@@ -33,6 +30,17 @@ const getColor = (status: Activity_Status_Enum) => {
   }
 };
 
+const getTextColor = (status: Activity_Status_Enum) => {
+  switch (status) {
+    case Activity_Status_Enum.Done:
+      return "success.main";
+    case Activity_Status_Enum.Ongoing:
+      return "warning.main";
+    case Activity_Status_Enum.Outstanding:
+      return "error.main";
+  }
+};
+
 const getIcon = (status: Activity_Status_Enum) => {
   let Icon: SvgIconComponent;
   switch (status) {
@@ -40,22 +48,25 @@ const getIcon = (status: Activity_Status_Enum) => {
       Icon = CheckCircle;
       break;
     case Activity_Status_Enum.Ongoing:
-      Icon = PendingActions;
+      Icon = TimerOutlined;
       break;
 
     case Activity_Status_Enum.Outstanding:
       Icon = CalendarTodayOutlined;
   }
-  return <Icon color={getColor(status)} />;
+  return <Icon />;
 };
 
 const MyActivitiesView = () => {
   const { data, loading, error } = useGetUserActivitiesQuery();
   const activities = data?.user_activity;
+  const navigate = useNavigate();
   return (
     <Box>
       <AppBar
         sx={{
+          borderBottomLeftRadius: "20px",
+          borderBottomRightRadius: "20px",
           position: "sticky",
           padding: "16px",
         }}
@@ -91,6 +102,8 @@ const MyActivitiesView = () => {
                 <Card
                   key={activity.id}
                   sx={{
+                    display: "flex",
+                    flexDirection: "column",
                     padding: "20px",
                     marginY: "8px",
                     marginBottom: index === activities.length - 1 ? "70px" : 0,
@@ -113,7 +126,7 @@ const MyActivitiesView = () => {
                         <Box display="flex" alignItems="center">
                           <Typography
                             variant="subtitle2"
-                            color={getColor(userActivity.status)}
+                            color={getTextColor(userActivity.status)}
                           >
                             {userActivity.status}
                           </Typography>
@@ -123,6 +136,23 @@ const MyActivitiesView = () => {
                       </Box>
                     </Box>
                   </Box>
+                  {userActivity.status === Activity_Status_Enum.Outstanding && (
+                    <>
+                      <Box height="10px" />
+
+                      <Box display={"flex"} justifyContent={"end"}>
+                        <Button
+                          onClick={() => {
+                            navigate("/activity/complete/" + activity.id);
+                          }}
+                          variant="contained"
+                          color="success"
+                        >
+                          Complete Now <Done />
+                        </Button>
+                      </Box>
+                    </>
+                  )}
                 </Card>
               );
             })}

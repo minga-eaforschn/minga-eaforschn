@@ -1,7 +1,7 @@
 import "./activity-result.css";
 import Box from "@mui/material/Box";
 import React from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useGetActivityQuery } from "../../generated/graphql";
 import Center from "../../components/Center";
 import { Card, CardContent, CircularProgress, Stack } from "@mui/material";
@@ -14,7 +14,7 @@ import { getCostRank } from "../../components/activity-info/cost-rank";
 
 const ActivityResult: React.FC = (props) => {
   const { activityId } = useParams();
-
+  const navigate = useNavigate();
   const { data, loading, error, refetch } = useGetActivityQuery({
     variables: {
       id: activityId,
@@ -75,6 +75,7 @@ const ActivityResult: React.FC = (props) => {
             id={"map"}
             style={{
               height: "500px",
+              borderRadius: "10px",
             }}
           >
             <MapContainer
@@ -156,6 +157,32 @@ const ActivityResult: React.FC = (props) => {
               </Card>
             </Box>
           </div>
+          <Box
+            sx={{ marginTop: "20px" }}
+            display={"flex"}
+            justifyContent={"space-between"}
+          >
+            <Button
+              onClick={() => {
+                navigate("/activity/recommendation", {
+                  replace: true,
+                });
+              }}
+              variant="outlined"
+            >
+              Discard
+            </Button>
+            <Button
+              onClick={() => {
+                navigate("/home/activities", {
+                  replace: true,
+                });
+              }}
+              variant="contained"
+            >
+              Start challenge
+            </Button>
+          </Box>
         </CardContent>
       </Card>
     </Box>

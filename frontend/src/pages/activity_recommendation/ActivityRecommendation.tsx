@@ -46,10 +46,16 @@ const ActivityRecommendation = () => {
         alignItems: "center",
       }}
     >
-      <Box display="flex" flexDirection={"column"} width={"100%"}>
+      <Box
+        display="flex"
+        flexDirection={"column"}
+        width={"100%"}
+        alignItems={"center"}
+      >
         <Box
           component="img"
           height="400px"
+          maxWidth={"sm"}
           src={activity.image_url}
           alt=""
           sx={{
@@ -73,7 +79,7 @@ const ActivityRecommendation = () => {
               <>
                 <Box width="10px" />
                 <Typography color={theme.palette.secondary.main}>
-                  +{activity.gainable_xp} XP
+                  +{activity.gainable_xp} MP
                 </Typography>
               </>
             )}
@@ -95,7 +101,9 @@ const ActivityRecommendation = () => {
           direction="left"
           instruction="No, thanks"
           onInteraction={() => {
-            navigate("/activity/recommendation");
+            navigate("/activity/recommendation", {
+              replace: true,
+            });
           }}
         />
         <PixlKindl

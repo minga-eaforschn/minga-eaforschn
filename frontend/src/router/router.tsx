@@ -4,6 +4,7 @@ import Surprise from "../pages/home/components/Surprise";
 import SearchActivitiesView from "../pages/home/components/SearchActivitiesView";
 import ActivityRecommendationGen from "../pages/activity_recommendation/ActivityRecommendationGen";
 import MyActivitiesView from "../pages/home/components/MyActivitiesView";
+import CompleteActivity from "../pages/activity_complete/CompleteActivity";
 
 const Loadable = (Component: React.ElementType) => (props: any) => {
   return (
@@ -59,6 +60,7 @@ export default function Router() {
               element: <ActivityRecommendationGen />,
             },
             { path: "result/:activityId", element: <ActivityResult /> },
+            { path: "complete/:activityId", element: <CompleteActivity /> },
           ],
         },
       ],

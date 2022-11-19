@@ -20,7 +20,9 @@ export default function Home() {
 
   useEffect(() => {
     if (value && value !== initialPath) {
-      navigate(`/home/${value}`);
+      navigate(`/home/${value}`, {
+        replace: true,
+      });
     }
   }, [value]);
   return (

@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import pixlkindl from "../../../assets/pixlkindl.png";
+import pixlkindl from "../../../assets/MuenchnerKindlPicture.jpeg";
 import Button from "@mui/material/Button";
 
 interface PixlKindlProps {
@@ -23,7 +23,7 @@ const PixlKindl: React.FC<PixlKindlProps> = ({
         flexDirection="column"
       >
         <Box
-          width="50%"
+          width="40%"
           component="img"
           src={pixlkindl}
           sx={{

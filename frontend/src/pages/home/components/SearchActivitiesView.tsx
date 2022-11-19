@@ -121,9 +121,14 @@ const LikeButton: React.FC<LikeButtonProps> = ({ activity }) => {
   const [likes, setLikes] = React.useState(activity.likes.length);
   const theme = useTheme();
   return (
-    <Box position={"relative"}>
+    <Box paddingLeft={"8px"} position={"relative"}>
       <Button
-        sx={{ padding: "0" }}
+        sx={{
+          display: "inline-block",
+          padding: 0,
+          minHeight: 0,
+          minWidth: 0,
+        }}
         onClick={() => {
           if (isSet) {
             setLikes((prevState) => prevState - 1);
@@ -139,8 +144,8 @@ const LikeButton: React.FC<LikeButtonProps> = ({ activity }) => {
       <Typography
         sx={{
           position: "absolute",
-          top: "50%",
-          left: "65%",
+          top: "35%",
+          left: "75%",
         }}
       >
         {likes}
