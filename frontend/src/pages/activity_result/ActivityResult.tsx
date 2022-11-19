@@ -123,6 +123,9 @@ const ActivityResult: React.FC = (props) => {
                   {[...Array(timeRank)].map((e, i) => (
                     <AccessTime />
                   ))}
+                  {[...Array(3 - timeRank)].map((e, i) => (
+                    <AccessTime color={"disabled"} />
+                  ))}
                 </CardContent>
               </Card>
               <Card className={"info-card"}>
@@ -135,6 +138,9 @@ const ActivityResult: React.FC = (props) => {
                   </Stack>
                   {[...Array(costRank)].map((e, i) => (
                     <Payments />
+                  ))}
+                  {[...Array(3 - costRank)].map((e, i) => (
+                    <Payments color={"disabled"} />
                   ))}
                 </CardContent>
               </Card>
