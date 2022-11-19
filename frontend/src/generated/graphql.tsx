@@ -3790,7 +3790,7 @@ export type SearchActivitiesQueryVariables = Exact<{
 }>;
 
 
-export type SearchActivitiesQuery = { __typename?: 'query_root', activity: Array<{ __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration_in_hours?: any | null, estimated_pricing?: any | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> }> };
+export type SearchActivitiesQuery = { __typename?: 'query_root', activity: Array<{ __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration_in_hours?: any | null, estimated_pricing?: any | null, coordinates?: any | null }> };
 
 export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
