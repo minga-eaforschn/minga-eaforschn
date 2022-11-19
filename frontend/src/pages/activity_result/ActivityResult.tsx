@@ -1,3 +1,4 @@
+import "./activity-result.css";
 import Box from "@mui/material/Box";
 import React from "react";
 import { useParams } from "react-router";
@@ -17,17 +18,7 @@ import Button from "@mui/material/Button";
 import { AccessTime, Payments, Scoreboard } from "@mui/icons-material";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
-// const useStyles = makeStyles((theme: Theme) =>
-//   createStyles({
-//     attributeCard: {
-//       flexGrow: 1,
-//       margin: "10px",
-//     },
-//   })
-// );
-
 const ActivityResult: React.FC = (props) => {
-  // const classes = useStyles();
   const { activityId } = useParams();
 
   const { data, loading, error, refetch } = useGetActivityQuery({
@@ -124,9 +115,9 @@ const ActivityResult: React.FC = (props) => {
                 marginTop: "20px",
               }}
             >
-              <Card sx={{ flexGrow: 1 }}>
-                <CardContent>
-                  <Stack direction="row" spacing={2}>
+              <Card className={"info-card"}>
+                <CardContent className={"info-card-content"}>
+                  <Stack direction="row" spacing={"20px"}>
                     <AccessTime />
                     <Typography variant="body2">
                       {activity.estimated_duration_in_hours} hours
@@ -134,46 +125,28 @@ const ActivityResult: React.FC = (props) => {
                   </Stack>
                 </CardContent>
               </Card>
-              <Card sx={{ flexGrow: 1 }}>
-                <CardContent>
-                  <Stack direction="row" spacing={2}>
-                    <AccessTime />
+              <Card className={"info-card"}>
+                <CardContent className={"info-card-content"}>
+                  <Stack direction="row" spacing={"20px"}>
+                    <Payments />
                     <Typography variant="body2">
-                      {activity.estimated_duration_in_hours} hours
+                      {activity.estimated_pricing} euros
                     </Typography>
                   </Stack>
                 </CardContent>
               </Card>
-              <Card sx={{ flexGrow: 1 }}>
-                <CardContent>
-                  <Stack direction="row" spacing={2}>
-                    <AccessTime />
+              <Card className={"info-card"}>
+                <CardContent className={"info-card-content"}>
+                  <Stack direction="row" spacing={"20px"}>
+                    <Scoreboard />
                     <Typography variant="body2">
-                      {activity.estimated_duration_in_hours} hours
+                      {activity.gainable_xp} MP
                     </Typography>
                   </Stack>
                 </CardContent>
               </Card>
             </Box>
-
-            <Stack direction="row" spacing={1}>
-              <AccessTime />
-              <Typography variant="body2">
-                {activity.estimated_duration_in_hours} hours
-              </Typography>
-            </Stack>
-            <Stack direction="row" spacing={1}>
-              <Payments />
-              <Typography variant="body2">
-                {activity.estimated_pricing} euros
-              </Typography>
-            </Stack>
-            <Stack direction="row" spacing={1}>
-              <Scoreboard />
-              <Typography variant="body2">{activity.gainable_xp} MP</Typography>
-            </Stack>
           </div>
-          <Button href={mapUrl}>Zu Google Maps</Button>
         </CardContent>
       </Card>
     </Box>
