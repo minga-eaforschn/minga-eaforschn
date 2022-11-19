@@ -7,4 +7,8 @@ fragment Activity on activity {
     gainable_xp
     estimated_duration_in_hours
     estimated_pricing
+    likes {
+        id
+        user_id
+    }
 }

@@ -6,12 +6,17 @@ import {
   FormControl,
   List,
   TextField,
+  useTheme,
 } from "@mui/material";
 import React from "react";
-import { useSearchActivitiesQuery } from "../../../generated/graphql";
+import {
+  ActivityFragment,
+  User_Activity,
+  useSearchActivitiesQuery,
+} from "../../../generated/graphql";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { PlayArrow } from "@mui/icons-material";
+import { PlayArrow, ThumbUp } from "@mui/icons-material";
 import { useNavigate } from "react-router";
 
 interface SearchBarProps {
@@ -87,7 +92,8 @@ const SearchActivitiesView = () => {
                 </Box>
               </Box>
               <Box width={"10px"} />
-              <Box display={"flex"} justifyContent={"end"}>
+              <Box display={"flex"} justifyContent={"space-between"}>
+                <LikeButton activity={activity} />
                 <Button
                   onClick={() => {
                     navigate("/activity/result/" + activity.id);
@@ -100,6 +106,45 @@ const SearchActivitiesView = () => {
           ))}
         </List>
       )}
+    </Box>
+  );
+};
+
+interface LikeButtonProps {
+  activity: ActivityFragment;
+}
+
+const LikeButton: React.FC<LikeButtonProps> = ({ activity }) => {
+  const [isSet, setIsSet] = React.useState(
+    activity.likes.filter((like) => like.user_id === 1).length > 0
+  );
+  const [likes, setLikes] = React.useState(activity.likes.length);
+  const theme = useTheme();
+  return (
+    <Box position={"relative"}>
+      <Button
+        sx={{ padding: "0" }}
+        onClick={() => {
+          if (isSet) {
+            setLikes((prevState) => prevState - 1);
+            setIsSet(false);
+            return;
+          }
+          setLikes((prevState) => prevState + 1);
+          setIsSet(true);
+        }}
+      >
+        <ThumbUp color={isSet ? "primary" : "secondary"} />
+      </Button>
+      <Typography
+        sx={{
+          position: "absolute",
+          top: "50%",
+          left: "65%",
+        }}
+      >
+        {likes}
+      </Typography>
     </Box>
   );
 };
