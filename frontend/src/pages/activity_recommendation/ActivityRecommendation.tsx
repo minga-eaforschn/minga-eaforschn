@@ -1,10 +1,11 @@
 import { useGetActivityQuery } from "../../generated/graphql";
 import Center from "../../components/Center";
-import { Card, CircularProgress } from "@mui/material";
+import { Card, CircularProgress, Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import pixlkindl from "../../assets/pixlkindl.png";
+import { useNavigate } from "react-router";
 
 const ActivityRecommendation = () => {
   const { data, loading, error, refetch } = useGetActivityQuery({
@@ -12,6 +13,7 @@ const ActivityRecommendation = () => {
       id: "96e4473d-d41e-4a52-94dc-7f1d97dd7cbc",
     },
   });
+  const navigate = useNavigate();
   if (loading) {
     return (
       <Center>
@@ -31,14 +33,23 @@ const ActivityRecommendation = () => {
     );
   }
   return (
-    <Box
-      height="100vh"
-      display="flex"
-      flexDirection="column"
-      justifyContent="space-between"
+    <Container
+      sx={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
     >
       <Box>
-        <Box component="img" width="100vw" src={activity.image_url} alt="" />
+        <Box
+          component="img"
+          maxHeight="60vh"
+          maxWidth="100vw"
+          src={activity.image_url}
+          alt=""
+        />
         <Card
           elevation={0}
           sx={{
@@ -66,19 +77,35 @@ const ActivityRecommendation = () => {
         </Card>
       </Box>
       <Box display={"flex"} justifyContent="space-between" padding={"20px"}>
-        <PixlKindl direction="left" instruction="No, thanks" />
-        <PixlKindl instruction="Okay, let's gooo" />
+        <PixlKindl
+          direction="left"
+          instruction="No, thanks"
+          onInteraction={() => {
+            refetch();
+          }}
+        />
+        <PixlKindl
+          instruction="Okay, let's gooo"
+          onInteraction={() => {
+            navigate(`/activity/result/${activity.id}`);
+          }}
+        />
       </Box>
-    </Box>
+    </Container>
   );
 };
 
 interface PixlKindlProps {
   direction?: "left" | "right";
   instruction: string;
+  onInteraction: () => void;
 }
 
-const PixlKindl: React.FC<PixlKindlProps> = ({ direction, instruction }) => {
+const PixlKindl: React.FC<PixlKindlProps> = ({
+  direction,
+  instruction,
+  onInteraction,
+}) => {
   direction ??= "right";
   return (
     <Box>
@@ -97,7 +124,10 @@ const PixlKindl: React.FC<PixlKindlProps> = ({ direction, instruction }) => {
           }}
         />
         <Box height={5} />
-        <Button variant={direction === "left" ? "outlined" : "contained"}>
+        <Button
+          onClick={onInteraction}
+          variant={direction === "left" ? "outlined" : "contained"}
+        >
           {instruction}
         </Button>
       </Box>
