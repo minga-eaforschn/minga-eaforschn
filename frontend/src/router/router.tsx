@@ -13,22 +13,23 @@ const Loadable = (Component: React.ElementType) => (props: any) => {
 const Home = Loadable(lazy(() => import('../pages/Home')))
 const PageOne = Loadable(lazy(() => import('../pages/PageOne')))
 const NotFound = Loadable(lazy(() => import('../pages/NotFound')))
+const ActivityRecommendation = Loadable(lazy(() => import('../pages/activity_recommendation/ActivityRecommendation')))
 
 export default function Router() {
   return useRoutes([
     {
       path: '/',
-      element: <AppBarLayout/>,
       children: [
         {element: <Navigate to="/home" replace/>, index: true},
 
         {path: '/home', element: <Home/>},
         {path: '/page1', element: <PageOne/>},
+        {path: '/activity/recommendation', element: <ActivityRecommendation/>},
+
       ],
     },
     {
       path: '*',
-      element: <AppBarLayout/>,
       children: [
         {path: '404', element: <NotFound/>},
         {path: '*', element: <Navigate to="/404" replace/>},

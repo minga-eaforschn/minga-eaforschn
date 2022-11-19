@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import {client} from "./apollo";
 import {ApolloProvider} from '@apollo/client';
 import {BrowserRouter} from "react-router-dom";
+import {theme} from "./theme";
+import {ThemeProvider} from "@mui/material";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,9 +15,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}><ApolloProvider client={client}>
         <App/>
       </ApolloProvider>
+      </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -3,12 +3,10 @@ import {WebSocketLink} from '@apollo/client/link/ws'
 import {getMainDefinition} from '@apollo/client/utilities'
 
 function loadHeaders() {
-  if (process.env.REACT_APP_ADMIN_SECRET != undefined) {
-    return {'X-Hasura-Admin-Secret': process.env.REACT_APP_ADMIN_SECRET}
-  }
+  return {'x-hasura-admin-secret': 'myadminsecretkey'}
 }
 
-const httpUri = process.env.REACT_APP_GRAPHQL_ENDPOINT ? `${process.env.REACT_APP_GRAPHQL_ENDPOINT}` : `http://localhost:8080/v1/graphql`
+const httpUri = process.env.REACT_APP_GRAPHQL_ENDPOINT ? `${process.env.REACT_APP_GRAPHQL_ENDPOINT}` : `https://api.stephan.vm.selectcode.io/v1/graphql`
 const wsUri = process.env.REACT_APP_GRAPHQL_WS_ENDPOINT ? `${process.env.REACT_APP_GRAPHQL_WS_ENDPOINT.replace('http', 'ws')}` : `ws://localhost:8080/v1/graphql`
 
 const httpLink = new HttpLink({

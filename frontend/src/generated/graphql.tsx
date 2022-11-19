@@ -3774,6 +3774,15 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
+export type ActivityFragment = { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration_in_hours?: any | null, estimated_pricing?: any | null };
+
+export type GetActivityQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type GetActivityQuery = { __typename?: 'query_root', activity_by_pk?: { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration_in_hours?: any | null, estimated_pricing?: any | null } | null };
+
 export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3781,6 +3790,18 @@ export type GetUserQuery = { __typename?: 'query_root', user_by_pk?: { __typenam
 
 export type UserFragment = { __typename?: 'user', id: number, name: string, image_url: string, total_xp: number };
 
+export const ActivityFragmentDoc = gql`
+    fragment Activity on activity {
+  image_url
+  id
+  name
+  description
+  short_description
+  gainable_xp
+  estimated_duration_in_hours
+  estimated_pricing
+}
+    `;
 export const UserFragmentDoc = gql`
     fragment User on user {
   id
@@ -3789,6 +3810,41 @@ export const UserFragmentDoc = gql`
   total_xp
 }
     `;
+export const GetActivityDocument = gql`
+    query GetActivity($id: uuid!) {
+  activity_by_pk(id: $id) {
+    ...Activity
+  }
+}
+    ${ActivityFragmentDoc}`;
+
+/**
+ * __useGetActivityQuery__
+ *
+ * To run a query within a React component, call `useGetActivityQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetActivityQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetActivityQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetActivityQuery(baseOptions: Apollo.QueryHookOptions<GetActivityQuery, GetActivityQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetActivityQuery, GetActivityQueryVariables>(GetActivityDocument, options);
+      }
+export function useGetActivityLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetActivityQuery, GetActivityQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetActivityQuery, GetActivityQueryVariables>(GetActivityDocument, options);
+        }
+export type GetActivityQueryHookResult = ReturnType<typeof useGetActivityQuery>;
+export type GetActivityLazyQueryHookResult = ReturnType<typeof useGetActivityLazyQuery>;
+export type GetActivityQueryResult = Apollo.QueryResult<GetActivityQuery, GetActivityQueryVariables>;
 export const GetUserDocument = gql`
     query GetUser {
   user_by_pk(id: 1) {

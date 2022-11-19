@@ -1,0 +1,10 @@
+fragment Activity on activity {
+    image_url
+    id
+    name
+    description
+    short_description
+    gainable_xp
+    estimated_duration_in_hours
+    estimated_pricing
+}
