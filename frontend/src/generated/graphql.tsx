@@ -76,6 +76,14 @@ export type Activity = {
   gainable_xp?: Maybe<Scalars['Int']>;
   id: Scalars['uuid'];
   image_url: Scalars['String'];
+  /** An array relationship */
+  interactions: Array<Interaction>;
+  /** An aggregate relationship */
+  interactions_aggregate: Interaction_Aggregate;
+  /** An array relationship */
+  likes: Array<Like>;
+  /** An aggregate relationship */
+  likes_aggregate: Like_Aggregate;
   name: Scalars['String'];
   short_description: Scalars['String'];
   website_url?: Maybe<Scalars['String']>;
@@ -85,6 +93,46 @@ export type Activity = {
 /** columns and relationships of "activity" */
 export type ActivityCoordinatesArgs = {
   path?: InputMaybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "activity" */
+export type ActivityInteractionsArgs = {
+  distinct_on?: InputMaybe<Array<Interaction_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Interaction_Order_By>>;
+  where?: InputMaybe<Interaction_Bool_Exp>;
+};
+
+
+/** columns and relationships of "activity" */
+export type ActivityInteractions_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Interaction_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Interaction_Order_By>>;
+  where?: InputMaybe<Interaction_Bool_Exp>;
+};
+
+
+/** columns and relationships of "activity" */
+export type ActivityLikesArgs = {
+  distinct_on?: InputMaybe<Array<Like_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Like_Order_By>>;
+  where?: InputMaybe<Like_Bool_Exp>;
+};
+
+
+/** columns and relationships of "activity" */
+export type ActivityLikes_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Like_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Like_Order_By>>;
+  where?: InputMaybe<Like_Bool_Exp>;
 };
 
 /** aggregated selection of "activity" */
@@ -142,6 +190,10 @@ export type Activity_Bool_Exp = {
   gainable_xp?: InputMaybe<Int_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   image_url?: InputMaybe<String_Comparison_Exp>;
+  interactions?: InputMaybe<Interaction_Bool_Exp>;
+  interactions_aggregate?: InputMaybe<Interaction_Aggregate_Bool_Exp>;
+  likes?: InputMaybe<Like_Bool_Exp>;
+  likes_aggregate?: InputMaybe<Like_Aggregate_Bool_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
   short_description?: InputMaybe<String_Comparison_Exp>;
   website_url?: InputMaybe<String_Comparison_Exp>;
@@ -186,6 +238,8 @@ export type Activity_Insert_Input = {
   gainable_xp?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['uuid']>;
   image_url?: InputMaybe<Scalars['String']>;
+  interactions?: InputMaybe<Interaction_Arr_Rel_Insert_Input>;
+  likes?: InputMaybe<Like_Arr_Rel_Insert_Input>;
   name?: InputMaybe<Scalars['String']>;
   short_description?: InputMaybe<Scalars['String']>;
   website_url?: InputMaybe<Scalars['String']>;
@@ -228,6 +282,13 @@ export type Activity_Mutation_Response = {
   returning: Array<Activity>;
 };
 
+/** input type for inserting object relation for remote table "activity" */
+export type Activity_Obj_Rel_Insert_Input = {
+  data: Activity_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Activity_On_Conflict>;
+};
+
 /** on_conflict condition type for table "activity" */
 export type Activity_On_Conflict = {
   constraint: Activity_Constraint;
@@ -244,6 +305,8 @@ export type Activity_Order_By = {
   gainable_xp?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   image_url?: InputMaybe<Order_By>;
+  interactions_aggregate?: InputMaybe<Interaction_Aggregate_Order_By>;
+  likes_aggregate?: InputMaybe<Like_Aggregate_Order_By>;
   name?: InputMaybe<Order_By>;
   short_description?: InputMaybe<Order_By>;
   website_url?: InputMaybe<Order_By>;
@@ -378,6 +441,13 @@ export type Activity_Status_Mutation_Response = {
   affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<Activity_Status>;
+};
+
+/** input type for inserting object relation for remote table "activity_status" */
+export type Activity_Status_Obj_Rel_Insert_Input = {
+  data: Activity_Status_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Activity_Status_On_Conflict>;
 };
 
 /** on_conflict condition type for table "activity_status" */
@@ -590,6 +660,17 @@ export type Interaction_Aggregate = {
   nodes: Array<Interaction>;
 };
 
+export type Interaction_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Interaction_Aggregate_Bool_Exp_Count>;
+};
+
+export type Interaction_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Interaction_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Interaction_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "interaction" */
 export type Interaction_Aggregate_Fields = {
   __typename?: 'interaction_aggregate_fields';
@@ -603,6 +684,20 @@ export type Interaction_Aggregate_Fields = {
 export type Interaction_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Interaction_Select_Column>>;
   distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "interaction" */
+export type Interaction_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Interaction_Max_Order_By>;
+  min?: InputMaybe<Interaction_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "interaction" */
+export type Interaction_Arr_Rel_Insert_Input = {
+  data: Array<Interaction_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Interaction_On_Conflict>;
 };
 
 /** Boolean expression to filter rows from the table "interaction". All fields are combined with a logical 'AND'. */
@@ -638,12 +733,26 @@ export type Interaction_Max_Fields = {
   text?: Maybe<Scalars['String']>;
 };
 
+/** order by max() on columns of table "interaction" */
+export type Interaction_Max_Order_By = {
+  activity_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  text?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Interaction_Min_Fields = {
   __typename?: 'interaction_min_fields';
   activity_id?: Maybe<Scalars['uuid']>;
   id?: Maybe<Scalars['uuid']>;
   text?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "interaction" */
+export type Interaction_Min_Order_By = {
+  activity_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  text?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "interaction" */
@@ -908,6 +1017,17 @@ export type Like_Aggregate = {
   nodes: Array<Like>;
 };
 
+export type Like_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Like_Aggregate_Bool_Exp_Count>;
+};
+
+export type Like_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Like_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Like_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "like" */
 export type Like_Aggregate_Fields = {
   __typename?: 'like_aggregate_fields';
@@ -931,10 +1051,37 @@ export type Like_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "like" */
+export type Like_Aggregate_Order_By = {
+  avg?: InputMaybe<Like_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Like_Max_Order_By>;
+  min?: InputMaybe<Like_Min_Order_By>;
+  stddev?: InputMaybe<Like_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Like_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Like_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Like_Sum_Order_By>;
+  var_pop?: InputMaybe<Like_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Like_Var_Samp_Order_By>;
+  variance?: InputMaybe<Like_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "like" */
+export type Like_Arr_Rel_Insert_Input = {
+  data: Array<Like_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Like_On_Conflict>;
+};
+
 /** aggregate avg on columns */
 export type Like_Avg_Fields = {
   __typename?: 'like_avg_fields';
   user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "like" */
+export type Like_Avg_Order_By = {
+  user_id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "like". All fields are combined with a logical 'AND'. */
@@ -976,6 +1123,14 @@ export type Like_Max_Fields = {
   user_id?: Maybe<Scalars['Int']>;
 };
 
+/** order by max() on columns of table "like" */
+export type Like_Max_Order_By = {
+  activity_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Like_Min_Fields = {
   __typename?: 'like_min_fields';
@@ -983,6 +1138,14 @@ export type Like_Min_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   user_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "like" */
+export type Like_Min_Order_By = {
+  activity_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "like" */
@@ -1040,16 +1203,31 @@ export type Like_Stddev_Fields = {
   user_id?: Maybe<Scalars['Float']>;
 };
 
+/** order by stddev() on columns of table "like" */
+export type Like_Stddev_Order_By = {
+  user_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate stddev_pop on columns */
 export type Like_Stddev_Pop_Fields = {
   __typename?: 'like_stddev_pop_fields';
   user_id?: Maybe<Scalars['Float']>;
 };
 
+/** order by stddev_pop() on columns of table "like" */
+export type Like_Stddev_Pop_Order_By = {
+  user_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate stddev_samp on columns */
 export type Like_Stddev_Samp_Fields = {
   __typename?: 'like_stddev_samp_fields';
   user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "like" */
+export type Like_Stddev_Samp_Order_By = {
+  user_id?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "like" */
@@ -1072,6 +1250,11 @@ export type Like_Stream_Cursor_Value_Input = {
 export type Like_Sum_Fields = {
   __typename?: 'like_sum_fields';
   user_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "like" */
+export type Like_Sum_Order_By = {
+  user_id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "like" */
@@ -1100,16 +1283,31 @@ export type Like_Var_Pop_Fields = {
   user_id?: Maybe<Scalars['Float']>;
 };
 
+/** order by var_pop() on columns of table "like" */
+export type Like_Var_Pop_Order_By = {
+  user_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate var_samp on columns */
 export type Like_Var_Samp_Fields = {
   __typename?: 'like_var_samp_fields';
   user_id?: Maybe<Scalars['Float']>;
 };
 
+/** order by var_samp() on columns of table "like" */
+export type Like_Var_Samp_Order_By = {
+  user_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate variance on columns */
 export type Like_Variance_Fields = {
   __typename?: 'like_variance_fields';
   user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "like" */
+export type Like_Variance_Order_By = {
+  user_id?: InputMaybe<Order_By>;
 };
 
 /** mutation root */
@@ -2939,12 +3137,40 @@ export type User = {
   image_url: Scalars['String'];
   name: Scalars['String'];
   total_xp: Scalars['Int'];
+  /** An array relationship */
+  user_activities: Array<User_Activity>;
+  /** An aggregate relationship */
+  user_activities_aggregate: User_Activity_Aggregate;
+};
+
+
+/** columns and relationships of "user" */
+export type UserUser_ActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<User_Activity_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<User_Activity_Order_By>>;
+  where?: InputMaybe<User_Activity_Bool_Exp>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserUser_Activities_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<User_Activity_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<User_Activity_Order_By>>;
+  where?: InputMaybe<User_Activity_Bool_Exp>;
 };
 
 /** columns and relationships of "user_activity" */
 export type User_Activity = {
   __typename?: 'user_activity';
+  /** An object relationship */
+  activity: Activity;
   activity_id: Scalars['uuid'];
+  /** An object relationship */
+  activity_status: Activity_Status;
   created_at: Scalars['timestamptz'];
   due_to: Scalars['timestamptz'];
   id: Scalars['Int'];
@@ -2958,6 +3184,17 @@ export type User_Activity_Aggregate = {
   __typename?: 'user_activity_aggregate';
   aggregate?: Maybe<User_Activity_Aggregate_Fields>;
   nodes: Array<User_Activity>;
+};
+
+export type User_Activity_Aggregate_Bool_Exp = {
+  count?: InputMaybe<User_Activity_Aggregate_Bool_Exp_Count>;
+};
+
+export type User_Activity_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<User_Activity_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<User_Activity_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "user_activity" */
@@ -2983,6 +3220,28 @@ export type User_Activity_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "user_activity" */
+export type User_Activity_Aggregate_Order_By = {
+  avg?: InputMaybe<User_Activity_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<User_Activity_Max_Order_By>;
+  min?: InputMaybe<User_Activity_Min_Order_By>;
+  stddev?: InputMaybe<User_Activity_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<User_Activity_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<User_Activity_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<User_Activity_Sum_Order_By>;
+  var_pop?: InputMaybe<User_Activity_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<User_Activity_Var_Samp_Order_By>;
+  variance?: InputMaybe<User_Activity_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "user_activity" */
+export type User_Activity_Arr_Rel_Insert_Input = {
+  data: Array<User_Activity_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<User_Activity_On_Conflict>;
+};
+
 /** aggregate avg on columns */
 export type User_Activity_Avg_Fields = {
   __typename?: 'user_activity_avg_fields';
@@ -2990,12 +3249,20 @@ export type User_Activity_Avg_Fields = {
   user_id?: Maybe<Scalars['Float']>;
 };
 
+/** order by avg() on columns of table "user_activity" */
+export type User_Activity_Avg_Order_By = {
+  id?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
 /** Boolean expression to filter rows from the table "user_activity". All fields are combined with a logical 'AND'. */
 export type User_Activity_Bool_Exp = {
   _and?: InputMaybe<Array<User_Activity_Bool_Exp>>;
   _not?: InputMaybe<User_Activity_Bool_Exp>;
   _or?: InputMaybe<Array<User_Activity_Bool_Exp>>;
+  activity?: InputMaybe<Activity_Bool_Exp>;
   activity_id?: InputMaybe<Uuid_Comparison_Exp>;
+  activity_status?: InputMaybe<Activity_Status_Bool_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   due_to?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
@@ -3018,7 +3285,9 @@ export type User_Activity_Inc_Input = {
 
 /** input type for inserting data into table "user_activity" */
 export type User_Activity_Insert_Input = {
+  activity?: InputMaybe<Activity_Obj_Rel_Insert_Input>;
   activity_id?: InputMaybe<Scalars['uuid']>;
+  activity_status?: InputMaybe<Activity_Status_Obj_Rel_Insert_Input>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   due_to?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['Int']>;
@@ -3038,6 +3307,16 @@ export type User_Activity_Max_Fields = {
   user_id?: Maybe<Scalars['Int']>;
 };
 
+/** order by max() on columns of table "user_activity" */
+export type User_Activity_Max_Order_By = {
+  activity_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  due_to?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type User_Activity_Min_Fields = {
   __typename?: 'user_activity_min_fields';
@@ -3047,6 +3326,16 @@ export type User_Activity_Min_Fields = {
   id?: Maybe<Scalars['Int']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "user_activity" */
+export type User_Activity_Min_Order_By = {
+  activity_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  due_to?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "user_activity" */
@@ -3067,7 +3356,9 @@ export type User_Activity_On_Conflict = {
 
 /** Ordering options when selecting data from "user_activity". */
 export type User_Activity_Order_By = {
+  activity?: InputMaybe<Activity_Order_By>;
   activity_id?: InputMaybe<Order_By>;
+  activity_status?: InputMaybe<Activity_Status_Order_By>;
   created_at?: InputMaybe<Order_By>;
   due_to?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -3117,6 +3408,12 @@ export type User_Activity_Stddev_Fields = {
   user_id?: Maybe<Scalars['Float']>;
 };
 
+/** order by stddev() on columns of table "user_activity" */
+export type User_Activity_Stddev_Order_By = {
+  id?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate stddev_pop on columns */
 export type User_Activity_Stddev_Pop_Fields = {
   __typename?: 'user_activity_stddev_pop_fields';
@@ -3124,11 +3421,23 @@ export type User_Activity_Stddev_Pop_Fields = {
   user_id?: Maybe<Scalars['Float']>;
 };
 
+/** order by stddev_pop() on columns of table "user_activity" */
+export type User_Activity_Stddev_Pop_Order_By = {
+  id?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate stddev_samp on columns */
 export type User_Activity_Stddev_Samp_Fields = {
   __typename?: 'user_activity_stddev_samp_fields';
   id?: Maybe<Scalars['Float']>;
   user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "user_activity" */
+export type User_Activity_Stddev_Samp_Order_By = {
+  id?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "user_activity" */
@@ -3155,6 +3464,12 @@ export type User_Activity_Sum_Fields = {
   __typename?: 'user_activity_sum_fields';
   id?: Maybe<Scalars['Int']>;
   user_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "user_activity" */
+export type User_Activity_Sum_Order_By = {
+  id?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "user_activity" */
@@ -3190,6 +3505,12 @@ export type User_Activity_Var_Pop_Fields = {
   user_id?: Maybe<Scalars['Float']>;
 };
 
+/** order by var_pop() on columns of table "user_activity" */
+export type User_Activity_Var_Pop_Order_By = {
+  id?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate var_samp on columns */
 export type User_Activity_Var_Samp_Fields = {
   __typename?: 'user_activity_var_samp_fields';
@@ -3197,11 +3518,23 @@ export type User_Activity_Var_Samp_Fields = {
   user_id?: Maybe<Scalars['Float']>;
 };
 
+/** order by var_samp() on columns of table "user_activity" */
+export type User_Activity_Var_Samp_Order_By = {
+  id?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate variance on columns */
 export type User_Activity_Variance_Fields = {
   __typename?: 'user_activity_variance_fields';
   id?: Maybe<Scalars['Float']>;
   user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "user_activity" */
+export type User_Activity_Variance_Order_By = {
+  id?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
 };
 
 /** aggregated selection of "user" */
@@ -3250,6 +3583,8 @@ export type User_Bool_Exp = {
   image_url?: InputMaybe<String_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
   total_xp?: InputMaybe<Int_Comparison_Exp>;
+  user_activities?: InputMaybe<User_Activity_Bool_Exp>;
+  user_activities_aggregate?: InputMaybe<User_Activity_Aggregate_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "user" */
@@ -3270,6 +3605,7 @@ export type User_Insert_Input = {
   image_url?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   total_xp?: InputMaybe<Scalars['Int']>;
+  user_activities?: InputMaybe<User_Activity_Arr_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
@@ -3312,6 +3648,7 @@ export type User_Order_By = {
   image_url?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   total_xp?: InputMaybe<Order_By>;
+  user_activities_aggregate?: InputMaybe<User_Activity_Aggregate_Order_By>;
 };
 
 /** primary key columns input for table: user */
