@@ -9,7 +9,7 @@ const Loadable = (Component: React.ElementType) => (props: any) => {
   );
 };
 
-const Home = Loadable(lazy(() => import("../pages/Home")));
+const Home = Loadable(lazy(() => import("../pages/home/Home")));
 const PageOne = Loadable(lazy(() => import("../pages/PageOne")));
 const NotFound = Loadable(lazy(() => import("../pages/NotFound")));
 const ActivityRecommendation = Loadable(

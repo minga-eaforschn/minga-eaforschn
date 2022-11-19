@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router";
 
-export default function Home() {
+const Surprise = () => {
   const navigate = useNavigate();
   return (
     <Box
@@ -19,4 +19,6 @@ export default function Home() {
       </Button>
     </Box>
   );
-}
+};
+
+export default Surprise;

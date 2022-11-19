@@ -1,0 +1,9 @@
+query SearchActivities($query: String!) {
+    activity(where: {
+        name: {
+            _ilike: $query
+        }
+    }) {
+        ...Activity
+    }
+}

@@ -3783,6 +3783,13 @@ export type GetActivityQueryVariables = Exact<{
 
 export type GetActivityQuery = { __typename?: 'query_root', activity_by_pk?: { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration_in_hours?: any | null, estimated_pricing?: any | null } | null };
 
+export type SearchActivitiesQueryVariables = Exact<{
+  query: Scalars['String'];
+}>;
+
+
+export type SearchActivitiesQuery = { __typename?: 'query_root', activity: Array<{ __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration_in_hours?: any | null, estimated_pricing?: any | null }> };
+
 export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3845,6 +3852,41 @@ export function useGetActivityLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type GetActivityQueryHookResult = ReturnType<typeof useGetActivityQuery>;
 export type GetActivityLazyQueryHookResult = ReturnType<typeof useGetActivityLazyQuery>;
 export type GetActivityQueryResult = Apollo.QueryResult<GetActivityQuery, GetActivityQueryVariables>;
+export const SearchActivitiesDocument = gql`
+    query SearchActivities($query: String!) {
+  activity(where: {name: {_ilike: $query}}) {
+    ...Activity
+  }
+}
+    ${ActivityFragmentDoc}`;
+
+/**
+ * __useSearchActivitiesQuery__
+ *
+ * To run a query within a React component, call `useSearchActivitiesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchActivitiesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchActivitiesQuery({
+ *   variables: {
+ *      query: // value for 'query'
+ *   },
+ * });
+ */
+export function useSearchActivitiesQuery(baseOptions: Apollo.QueryHookOptions<SearchActivitiesQuery, SearchActivitiesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SearchActivitiesQuery, SearchActivitiesQueryVariables>(SearchActivitiesDocument, options);
+      }
+export function useSearchActivitiesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchActivitiesQuery, SearchActivitiesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SearchActivitiesQuery, SearchActivitiesQueryVariables>(SearchActivitiesDocument, options);
+        }
+export type SearchActivitiesQueryHookResult = ReturnType<typeof useSearchActivitiesQuery>;
+export type SearchActivitiesLazyQueryHookResult = ReturnType<typeof useSearchActivitiesLazyQuery>;
+export type SearchActivitiesQueryResult = Apollo.QueryResult<SearchActivitiesQuery, SearchActivitiesQueryVariables>;
 export const GetUserDocument = gql`
     query GetUser {
   user_by_pk(id: 1) {
