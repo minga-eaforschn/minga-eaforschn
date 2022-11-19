@@ -1,0 +1,15 @@
+version: '2.3'
+
+services:
+  whoami:
+    image: jwilder/whoami
+    container_name: whoami
+    networks:
+      - hackatum
+    labels:
+      caddy: whoami.stephan.vm.selectcode.io
+      caddy.reverse_proxy: "{{upstreams 8000}}"
+
+networks:
+  hackatum:
+    external: true

@@ -1,0 +1,5 @@
+query GetPets {
+    pet {
+        ...Pet
+    }
+}

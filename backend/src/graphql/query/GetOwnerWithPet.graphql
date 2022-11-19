@@ -1,0 +1,10 @@
+query OwnerWithPet($owner_name: String!) {
+    owner(where: {name: {_eq: $owner_name}}) {
+        id
+        name
+        pets {
+            id
+            name
+        }
+    }
+}

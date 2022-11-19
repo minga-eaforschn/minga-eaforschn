@@ -1,0 +1,29 @@
+version: '2.3'
+
+services:
+  hasura:
+    image: hasura/graphql-engine:v2.14.0
+    container_name: hasura
+    expose:
+    - 8080
+    restart: always
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgresql://postgres:ci-test-password@db.nfaxdfogpiwczcoiobbk.supabase.co:5432/postgres
+      ## enable the console served by server
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
+      ## enable debugging mode. It is recommended to disable this in production
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      ## uncomment next line to run console offline (i.e load console assets from server instead of CDN)
+      # HASURA_GRAPHQL_CONSOLE_ASSETS_DIR: /srv/console-assets
+      ## uncomment next line to set an admin secret
+      HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+    networks:
+      - hackatum
+    labels:
+      caddy: api.stephan.vm.selectcode.io
+      caddy.reverse_proxy: "{{upstreams 8080}}"
+
+networks:
+  hackatum:
+    external: true
