@@ -4,7 +4,7 @@ import { Archive, Search } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router";
-import logo from "../../assets/MingaEaforschnLogo.png";
+import logo from "../../assets/MingaEaforschnLogo-small.png";
 
 export default function Home() {
   const location = useLocation();
