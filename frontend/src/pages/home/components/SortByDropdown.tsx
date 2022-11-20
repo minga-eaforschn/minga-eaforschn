@@ -11,6 +11,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Box } from "@mui/material";
 import { ReactNode } from "react";
+import { Clear } from "@mui/icons-material";
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -51,13 +52,19 @@ const StyledMenu = styled((props: MenuProps) => (
   },
 }));
 
-export type SortOption = "newest" | "oldest" | "most likes" | "least likes";
+export type SortOption =
+  | "newest"
+  | "oldest"
+  | "most likes"
+  | "least likes"
+  | "no filter";
 
 export const sortOptions: SortOption[] = [
   "newest",
   "oldest",
   "most likes",
   "least likes",
+  "no filter",
 ];
 
 export interface SortByDropdownProps {
@@ -70,6 +77,7 @@ const sortOptionIcons: Record<SortOption, ReactNode> = {
   oldest: <KeyboardArrowDownIcon />,
   "least likes": <KeyboardArrowDownIcon />,
   "most likes": <KeyboardArrowDownIcon />,
+  "no filter": <Clear />,
 };
 
 const SortByDropdown: React.FC<SortByDropdownProps> = ({

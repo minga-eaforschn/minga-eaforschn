@@ -72,7 +72,7 @@ const ActivityResult: React.FC = (props) => {
           margin: "50px",
           borderRadius: "20px",
           padding: "50px",
-          width: "50%",
+          width: "80%",
           minWidth: "300px",
           background: "white",
         }}
@@ -96,9 +96,7 @@ const ActivityResult: React.FC = (props) => {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <Marker position={[lat, lon]}>
-              <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
-              </Popup>
+              <Popup>{activity.name}</Popup>
             </Marker>
           </MapContainer>
         </div>

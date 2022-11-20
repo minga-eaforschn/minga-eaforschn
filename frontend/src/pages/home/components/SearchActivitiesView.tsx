@@ -52,7 +52,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchQuery }) => (
 const SearchActivitiesView = () => {
   const [searchQuery, setSearchQuery] = React.useState("");
 
-  const [sortOption, setSortOption] = React.useState<SortOption>("most likes");
+  const [sortOption, setSortOption] = React.useState<SortOption>("no filter");
   let likeOrderBy: Order_By | undefined = undefined;
   let createdAtOrderBy: Order_By | undefined = undefined;
   if (sortOption === "most likes") {

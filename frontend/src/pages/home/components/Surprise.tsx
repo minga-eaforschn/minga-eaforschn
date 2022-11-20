@@ -2,7 +2,6 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router";
 import MuenchnerKindl from "../../../components/MuenchnerKindl";
-import SpeechBubble from "../../../components/SpeechBubble";
 
 const Surprise = () => {
   const navigate = useNavigate();
@@ -28,6 +27,7 @@ const Surprise = () => {
         <Button
           onClick={() => navigate("/activity/recommendation")}
           variant="contained"
+          size={"large"}
         >
           Surprise me!
         </Button>
