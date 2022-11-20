@@ -4,8 +4,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(to top, #f0f1f1, #e2e0e5);
-  background-repeat: no-repeat;
+  background: repeating-linear-gradient(to right, #f0f1f1, #e2e0e5);
 }
 
 body,html {

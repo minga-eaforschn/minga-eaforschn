@@ -51,101 +51,100 @@ const ActivityResult: React.FC = (props) => {
   const lon = coordinates["lon"];
 
   return (
-    <Box key={`activity-${activity.id}`}>
-      <Card
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+    <Box
+      key={`activity-${activity.id}`}
+      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+    >
+      <CardContent
+        sx={{
+          boxShadow: 3,
+          margin: "50px",
+          borderRadius: "20px",
+          padding: "50px",
+          width: "50%",
+          minWidth: "300px",
+        }}
       >
-        <CardContent
-          sx={{
-            boxShadow: 3,
-            margin: "50px",
-            borderRadius: "20px",
-            padding: "50px",
-            width: "50%",
-            minWidth: "300px",
+        <div
+          id={"map"}
+          style={{
+            height: "500px",
+            borderRadius: "10px",
           }}
         >
-          <div
-            id={"map"}
-            style={{
-              height: "500px",
-              borderRadius: "10px",
+          <MapContainer
+            id="osm-map"
+            center={[lat, lon]}
+            zoom={13}
+            scrollWheelZoom={false}
+            style={{ height: "100%", width: "100%" }}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={[lat, lon]}>
+              <Popup>
+                A pretty CSS3 popup. <br /> Easily customizable.
+              </Popup>
+            </Marker>
+          </MapContainer>
+        </div>
+
+        <div>
+          <Typography variant="h2" sx={{ marginTop: "40px" }}>
+            {activity.name}
+          </Typography>
+          <Typography variant="body2" sx={{ marginTop: "20px" }}>
+            {activity.description}
+          </Typography>
+
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignContent: "space-around",
+              marginTop: "20px",
             }}
           >
-            <MapContainer
-              id="osm-map"
-              center={[lat, lon]}
-              zoom={13}
-              scrollWheelZoom={false}
-              style={{ height: "100%", width: "100%" }}
-            >
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              <Marker position={[lat, lon]}>
-                <Popup>
-                  A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-              </Marker>
-            </MapContainer>
-          </div>
-
-          <div>
-            <Typography variant="h2" sx={{ marginTop: "40px" }}>
-              {activity.name}
-            </Typography>
-            <Typography variant="body2" sx={{ marginTop: "20px" }}>
-              {activity.description}
-            </Typography>
-
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                alignContent: "space-around",
-                marginTop: "20px",
-              }}
-            >
-              <CostCard cost={activity.estimated_costs} />
-              <Card className={"info-card"}>
-                <CardContent className={"info-card-content"}>
-                  <Stack direction="row" spacing={"20px"}>
-                    <Scoreboard />
-                    <Typography variant="body2">
-                      {activity.gainable_xp} MP
-                    </Typography>
-                  </Stack>
-                </CardContent>
-              </Card>
-            </Box>
-          </div>
-          <Box
-            sx={{ marginTop: "20px" }}
-            display={"flex"}
-            justifyContent={"space-between"}
-          >
-            <Button
-              onClick={() => {
-                navigate(-1);
-              }}
-              variant="outlined"
-            >
-              Discard
-            </Button>
-            <Button
-              onClick={() => {
-                navigate("/home/activities", {
-                  replace: true,
-                });
-              }}
-              variant="contained"
-            >
-              Start challenge
-            </Button>
+            <CostCard cost={activity.estimated_costs} />
+            <Card className={"info-card"}>
+              <CardContent className={"info-card-content"}>
+                <Stack direction="row" spacing={"20px"}>
+                  <Scoreboard />
+                  <Typography variant="body2">
+                    {activity.gainable_xp} MP
+                  </Typography>
+                </Stack>
+              </CardContent>
+            </Card>
           </Box>
-        </CardContent>
-      </Card>
+        </div>
+        <Box
+          sx={{ marginTop: "20px" }}
+          display={"flex"}
+          justifyContent={"space-between"}
+        >
+          <Button
+            onClick={() => {
+              navigate(-1);
+            }}
+            variant="outlined"
+          >
+            Discard
+          </Button>
+          <Button
+            onClick={() => {
+              navigate("/home/activities", {
+                replace: true,
+              });
+            }}
+            variant="contained"
+          >
+            Start challenge
+          </Button>
+        </Box>
+      </CardContent>
     </Box>
   );
 };
