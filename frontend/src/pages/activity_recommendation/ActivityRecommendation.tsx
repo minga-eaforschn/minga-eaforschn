@@ -7,6 +7,7 @@ import {
   Chip,
   CircularProgress,
   Container,
+  Link,
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -93,6 +94,11 @@ const ActivityRecommendation = () => {
               />
             </Box>
             <Typography>{activity.short_description}</Typography>
+            {activity.website_url && (
+              <Link href={activity.website_url}>
+                More information from the provider
+              </Link>
+            )}
             <CostCard cost={activity.estimated_costs}></CostCard>
           </CardContent>
         </Card>

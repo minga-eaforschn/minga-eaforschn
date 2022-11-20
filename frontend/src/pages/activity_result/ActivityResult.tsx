@@ -4,7 +4,13 @@ import React from "react";
 import { useNavigate, useParams } from "react-router";
 import { useGetActivityQuery } from "../../generated/graphql";
 import Center from "../../components/Center";
-import { Card, CardContent, CircularProgress, Stack } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CircularProgress,
+  Link,
+  Stack,
+} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Scoreboard } from "@mui/icons-material";
@@ -104,6 +110,11 @@ const ActivityResult: React.FC = (props) => {
           <Typography variant="body2" sx={{ marginTop: "20px" }}>
             {activity.description}
           </Typography>
+          {activity.website_url && (
+            <Link href={activity.website_url}>
+              More information from the provider
+            </Link>
+          )}
 
           <Box
             sx={{

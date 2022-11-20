@@ -3879,7 +3879,7 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
-export type ActivityFragment = { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration?: any | null, estimated_costs?: any | null, coordinates?: any | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> };
+export type ActivityFragment = { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration?: any | null, estimated_costs?: any | null, coordinates?: any | null, website_url?: string | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> };
 
 export type GetActivitiesQueryVariables = Exact<{
   excludedIds: Array<Scalars['uuid']> | Scalars['uuid'];
@@ -3893,12 +3893,12 @@ export type GetActivityQueryVariables = Exact<{
 }>;
 
 
-export type GetActivityQuery = { __typename?: 'query_root', activity_by_pk?: { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration?: any | null, estimated_costs?: any | null, coordinates?: any | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> } | null };
+export type GetActivityQuery = { __typename?: 'query_root', activity_by_pk?: { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration?: any | null, estimated_costs?: any | null, coordinates?: any | null, website_url?: string | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> } | null };
 
 export type GetUserActivitiesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUserActivitiesQuery = { __typename?: 'query_root', user_activity: Array<{ __typename?: 'user_activity', due_to: any, status: Activity_Status_Enum, activity: { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration?: any | null, estimated_costs?: any | null, coordinates?: any | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> } }> };
+export type GetUserActivitiesQuery = { __typename?: 'query_root', user_activity: Array<{ __typename?: 'user_activity', due_to: any, status: Activity_Status_Enum, activity: { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration?: any | null, estimated_costs?: any | null, coordinates?: any | null, website_url?: string | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> } }> };
 
 export type SearchActivitiesQueryVariables = Exact<{
   query: Scalars['String'];
@@ -3907,7 +3907,7 @@ export type SearchActivitiesQueryVariables = Exact<{
 }>;
 
 
-export type SearchActivitiesQuery = { __typename?: 'query_root', activity: Array<{ __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration?: any | null, estimated_costs?: any | null, coordinates?: any | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> }> };
+export type SearchActivitiesQuery = { __typename?: 'query_root', activity: Array<{ __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration?: any | null, estimated_costs?: any | null, coordinates?: any | null, website_url?: string | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> }> };
 
 export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3927,6 +3927,7 @@ export const ActivityFragmentDoc = gql`
   estimated_duration
   estimated_costs
   coordinates
+  website_url
   likes {
     id
     user_id
