@@ -1,14 +1,12 @@
 import { useGetActivityQuery } from "../../generated/graphql";
 import Center from "../../components/Center";
 import {
-  Avatar,
   Card,
   CardContent,
   CardMedia,
   Chip,
   CircularProgress,
   Container,
-  useTheme,
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -16,8 +14,11 @@ import Button from "@mui/material/Button";
 import { useNavigate, useParams } from "react-router";
 import PixlKindl from "./components/PixlKindl";
 import MpAvatar from "./components/Avatar";
+import CostCard from "../../components/CostCard";
+
 // @ts-ignore
 import okayLetsGo from "../../assets/sounds/okayLetsGo.mp3";
+
 const playOkayyLetsGoo = async () => {
   const audio = new Audio(okayLetsGo);
   await audio.play();
@@ -53,85 +54,49 @@ const ActivityRecommendation = () => {
   }
 
   return (
-    <Container
-    // sx={{
-    //   maxWidth: "sm",
-    //   height: "100vh",
-    //   display: "flex",
-    //   flexDirection: "column",
-    //   justifyContent: "space-between",
-    //   alignItems: "center",
-    // }}
-    >
-      <Card
-        sx={{
-          boxShadow: 3,
-          borderRadius: "20px",
-          width: "50%",
-          minWidth: "300px",
-        }}
+    <Box>
+      <Container
+        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
       >
-        <CardMedia
-          image={activity.image_url}
-          sx={{ height: 0, paddingTop: "56.25%" }}
-        />
-        <CardContent
+        <Card
           sx={{
-            padding: "50px",
+            boxShadow: 3,
+            borderRadius: "20px",
+            width: "50%",
             minWidth: "300px",
           }}
         >
-          {/*<Box*/}
-          {/*  component="img"*/}
-          {/*  height="400px"*/}
-          {/*  maxWidth={"sm"}*/}
-          {/*  src={activity.image_url}*/}
-          {/*  alt=""*/}
-          {/*  sx={{*/}
-          {/*    marginTop: "16px",*/}
-          {/*    objectFit: "cover",*/}
-          {/*    objectPosition: "center",*/}
-          {/*    borderRadius: "20px",*/}
-          {/*  }}*/}
-          {/*/>*/}
-          {/*<Card*/}
-          {/*  elevation={0}*/}
-          {/*  sx={{*/}
-          {/*    borderRadius: "20px 20px 0 0",*/}
-          {/*    padding: "20px",*/}
-          {/*  }}*/}
-          {/*>*/}
-          <Box
+          <CardMedia
+            image={activity.image_url}
+            sx={{ height: 0, paddingTop: "56.25%" }}
+          />
+          <CardContent
             sx={{
-              display: "flex",
-              flexDirection: "row",
-              marginBottom: "20px",
-              justifyContent: "space-between",
-              alignItems: "center",
+              padding: "20px",
+              minWidth: "300px",
             }}
           >
-            <Typography variant="h4">{activity.name}</Typography>
-            <Chip
-              avatar={<MpAvatar />}
-              label={activity.gainable_xp}
-              color="primary"
-            />
-          </Box>
-          <Typography>{activity.short_description}</Typography>
-          {/*{activity.estimated_duration_in_hours != null && (*/}
-          {/*  <Typography variant="subtitle2">*/}
-          {/*    Estimated duration: {activity.estimated_duration_in_hours} hrs*/}
-          {/*  </Typography>*/}
-          {/*)}*/}
-          {/*{activity.estimated_pricing != null && (*/}
-          {/*  <Typography variant="subtitle2">*/}
-          {/*    Estimated price: {activity.estimated_pricing}€*/}
-          {/*  </Typography>*/}
-          {/*)}*/}
-          {/*</Card>*/}
-        </CardContent>
-      </Card>
-
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                marginBottom: "20px",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Typography variant="h4">{activity.name}</Typography>
+              <Chip
+                avatar={<MpAvatar />}
+                label={activity.gainable_xp}
+                color="primary"
+              />
+            </Box>
+            <Typography>{activity.short_description}</Typography>
+            <CostCard cost={activity.estimated_costs}></CostCard>
+          </CardContent>
+        </Card>
+      </Container>
       <Box display={"flex"} justifyContent="space-between" padding={"20px"}>
         <PixlKindl
           direction="left"
@@ -150,7 +115,7 @@ const ActivityRecommendation = () => {
           }}
         />
       </Box>
-    </Container>
+    </Box>
   );
 };
 
