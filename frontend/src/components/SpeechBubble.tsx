@@ -1,15 +1,18 @@
 import { Box, SxProps } from "@mui/material";
 import "./SpeechBubble.css";
+import { within } from "@testing-library/react";
 
 let windowWidth = window.innerWidth;
 let windowHeight = window.innerHeight;
 
 const calculateSpeechBubbleSize = () => {
-  let width = 100 - windowWidth / 20;
-  let height = 100 - windowHeight / 10;
+  let width = 50 + windowWidth / 20;
+  let height = 10 + windowHeight / 10;
 
-  if (height > 50) {
-    height = 50;
+  console.log(height);
+  console.log(width);
+  if (height > 30) {
+    height = 20 + windowHeight / 50;
   }
   return { width: width + "%", height: height + "%" };
 };

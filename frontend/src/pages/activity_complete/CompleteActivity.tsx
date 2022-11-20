@@ -33,7 +33,7 @@ const CompleteActivity = () => {
       flexDirection={"column"}
       alignItems={"center"}
       justifyContent="center"
-      sx={{ margin: "10px" }}
+      sx={{ margin: "10px", paddingBottom: "20px" }}
     >
       <Card
         sx={{
@@ -91,8 +91,9 @@ const CompleteActivity = () => {
           </Button>
         </Box>
       </Card>
+      <Box margin={"10px"}></Box>
       <MuenchnerKindl
-        sx={{ width: "20%", paddingTop: "20px" }}
+        sx={{ width: "20%", paddingTop: "40px" }}
         text={
           "Grias di, congratulations on completing your first exploration! I'm really proud of you."
         }
