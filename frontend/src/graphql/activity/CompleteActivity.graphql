@@ -1,7 +1,12 @@
-mutation CompleteActivity($object: user_activity_insert_input!) {
-    insert_user_activity_one(object: $object, on_conflict: {
+mutation CompleteActivity($userId: Int!, $activityId: uuid!) {
+    insert_user_activity_one(object: {
+        user_id: $userId,
+        activity_id: $activityId,
+        status: DONE
+    }, on_conflict: {
         constraint: user_activity_activity_id_user_id_key,
         update_columns: [
+            status,
         ]
     }) {
         id

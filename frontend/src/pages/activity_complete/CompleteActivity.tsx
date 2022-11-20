@@ -1,5 +1,8 @@
 import { useNavigate, useParams } from "react-router";
-import { useGetActivityQuery } from "../../generated/graphql";
+import {
+  useCompleteActivityMutation,
+  useGetActivityQuery,
+} from "../../generated/graphql";
 import Center from "../../components/Center";
 import { Card, CircularProgress } from "@mui/material";
 import Typography from "@mui/material/Typography";
@@ -7,6 +10,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { UploadFile } from "@mui/icons-material";
 import MuenchnerKindl from "../../components/MuenchnerKindl";
+import { useState } from "react";
 
 const CompleteActivity = () => {
   const { activityId } = useParams<{ activityId: string }>();
@@ -17,7 +21,8 @@ const CompleteActivity = () => {
   });
 
   const navigate = useNavigate();
-
+  const [completingActivity, setCompletingActivity] = useState(false);
+  const [completeActivity] = useCompleteActivityMutation();
   const activity = data?.activity_by_pk;
   if (loading || error || !activity) {
     return (
@@ -78,16 +83,28 @@ const CompleteActivity = () => {
           <Box width={"10px"} />
           <Button
             onClick={async () => {
-              // const event = new Event("completed");
-              // document.dispatchEvent(event);
-
-              navigate("/home/activities", {
-                replace: true,
-              });
+              if (completingActivity) {
+                return;
+              }
+              setCompletingActivity(true);
+              try {
+                await completeActivity({
+                  variables: {
+                    activityId: activity.id,
+                    userId: 1,
+                  },
+                });
+              } finally {
+                setCompletingActivity(false);
+                navigate("/home/activities", {
+                  replace: true,
+                });
+              }
             }}
             variant={"contained"}
           >
             Complete
+            {completingActivity && <CircularProgress />}
           </Button>
         </Box>
       </Card>

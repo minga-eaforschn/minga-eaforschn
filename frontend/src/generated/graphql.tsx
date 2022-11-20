@@ -3882,7 +3882,8 @@ export type Uuid_Comparison_Exp = {
 export type ActivityFragment = { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration?: any | null, estimated_costs?: any | null, coordinates?: any | null, website_url?: string | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> };
 
 export type CompleteActivityMutationVariables = Exact<{
-  object: User_Activity_Insert_Input;
+  userId: Scalars['Int'];
+  activityId: Scalars['uuid'];
 }>;
 
 
@@ -3964,10 +3965,10 @@ export const UserFragmentDoc = gql`
 }
     `;
 export const CompleteActivityDocument = gql`
-    mutation CompleteActivity($object: user_activity_insert_input!) {
+    mutation CompleteActivity($userId: Int!, $activityId: uuid!) {
   insert_user_activity_one(
-    object: $object
-    on_conflict: {constraint: user_activity_activity_id_user_id_key, update_columns: []}
+    object: {user_id: $userId, activity_id: $activityId, status: DONE}
+    on_conflict: {constraint: user_activity_activity_id_user_id_key, update_columns: [status]}
   ) {
     id
   }
@@ -3988,7 +3989,8 @@ export type CompleteActivityMutationFn = Apollo.MutationFunction<CompleteActivit
  * @example
  * const [completeActivityMutation, { data, loading, error }] = useCompleteActivityMutation({
  *   variables: {
- *      object: // value for 'object'
+ *      userId: // value for 'userId'
+ *      activityId: // value for 'activityId'
  *   },
  * });
  */
