@@ -7,10 +7,10 @@ import Center from "../../components/Center";
 import { Card, CardContent, CircularProgress, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { AccessTime, Payments, Scoreboard } from "@mui/icons-material";
+import { Payments, Scoreboard } from "@mui/icons-material";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import { getTimeRank } from "../../components/activity-info/time-rank";
 import { getCostRank } from "../../components/activity-info/cost-rank";
+import CostCard from "../../components/CostCard";
 
 const ActivityResult: React.FC = (props) => {
   const { activityId } = useParams();
@@ -50,11 +50,6 @@ const ActivityResult: React.FC = (props) => {
   const coordinates = activity.coordinates;
   const lat = coordinates["lat"];
   const lon = coordinates["lon"];
-
-  const costRank = getCostRank(activity.estimated_pricing);
-  const timeRank = getTimeRank(activity.estimated_duration_in_hours);
-
-  const mapUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
 
   return (
     <Box>
@@ -113,38 +108,7 @@ const ActivityResult: React.FC = (props) => {
                 marginTop: "20px",
               }}
             >
-              <Card className={"info-card"}>
-                <CardContent className={"info-card-content"}>
-                  <Stack direction="row" spacing={"20px"}>
-                    {/*<AccessTime />*/}
-                    {/*<Typography variant="body2">*/}
-                    {/*  {activity.estimated_duration_in_hours} hours*/}
-                    {/*</Typography>*/}
-                  </Stack>
-                  {[...Array(timeRank)].map((e, i) => (
-                    <AccessTime />
-                  ))}
-                  {[...Array(3 - timeRank)].map((e, i) => (
-                    <AccessTime color={"disabled"} />
-                  ))}
-                </CardContent>
-              </Card>
-              <Card className={"info-card"}>
-                <CardContent className={"info-card-content"}>
-                  <Stack direction="row" spacing={"20px"}>
-                    {/*<Payments />*/}
-                    {/*<Typography variant="body2">*/}
-                    {/*  {activity.estimated_pricing} euros*/}
-                    {/*</Typography>*/}
-                  </Stack>
-                  {[...Array(costRank)].map((e, i) => (
-                    <Payments />
-                  ))}
-                  {[...Array(3 - costRank)].map((e, i) => (
-                    <Payments color={"disabled"} />
-                  ))}
-                </CardContent>
-              </Card>
+              <CostCard cost={activity.estimated_costs} />
               <Card className={"info-card"}>
                 <CardContent className={"info-card-content"}>
                   <Stack direction="row" spacing={"20px"}>

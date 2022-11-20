@@ -99,37 +99,29 @@ const ActivityRecommendation = () => {
             sx={{
               display: "flex",
               flexDirection: "row",
+              marginBottom: "20px",
               justifyContent: "space-between",
               alignItems: "center",
             }}
           >
             <Typography variant="h4">{activity.name}</Typography>
-            {/*<Chip label={"+50 MP"} color={"success"} />*/}
             <Chip
               avatar={<MpAvatar />}
               label={activity.gainable_xp}
-              color="success"
+              color="primary"
             />
           </Box>
           <Typography>{activity.short_description}</Typography>
-          {activity.gainable_xp != null && (
-            <>
-              <Box width="10px" />
-              <Typography color={theme.palette.secondary.main}>
-                +{activity.gainable_xp} MP
-              </Typography>
-            </>
-          )}
-          {activity.estimated_duration_in_hours != null && (
-            <Typography variant="subtitle2">
-              Estimated duration: {activity.estimated_duration_in_hours} hrs
-            </Typography>
-          )}
-          {activity.estimated_pricing != null && (
-            <Typography variant="subtitle2">
-              Estimated price: {activity.estimated_pricing}€
-            </Typography>
-          )}
+          {/*{activity.estimated_duration_in_hours != null && (*/}
+          {/*  <Typography variant="subtitle2">*/}
+          {/*    Estimated duration: {activity.estimated_duration_in_hours} hrs*/}
+          {/*  </Typography>*/}
+          {/*)}*/}
+          {/*{activity.estimated_pricing != null && (*/}
+          {/*  <Typography variant="subtitle2">*/}
+          {/*    Estimated price: {activity.estimated_pricing}€*/}
+          {/*  </Typography>*/}
+          {/*)}*/}
           {/*</Card>*/}
         </CardContent>
       </Card>

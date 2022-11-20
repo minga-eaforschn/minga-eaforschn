@@ -21,6 +21,8 @@ type activity {
         path: String
     ): jsonb
     description: String!
+    estimated_costs: float8
+    estimated_duration: float8
     estimated_duration_in_hours: numeric
     estimated_pricing: numeric
     gainable_xp: Int
@@ -106,6 +108,8 @@ type activity_aggregate_fields {
 
 "aggregate avg on columns"
 type activity_avg_fields {
+    estimated_costs: Float
+    estimated_duration: Float
     estimated_duration_in_hours: Float
     estimated_pricing: Float
     gainable_xp: Float
@@ -114,6 +118,8 @@ type activity_avg_fields {
 "aggregate max on columns"
 type activity_max_fields {
     description: String
+    estimated_costs: float8
+    estimated_duration: float8
     estimated_duration_in_hours: numeric
     estimated_pricing: numeric
     gainable_xp: Int
@@ -127,6 +133,8 @@ type activity_max_fields {
 "aggregate min on columns"
 type activity_min_fields {
     description: String
+    estimated_costs: float8
+    estimated_duration: float8
     estimated_duration_in_hours: numeric
     estimated_pricing: numeric
     gainable_xp: Int
@@ -183,6 +191,8 @@ type activity_status_mutation_response {
 
 "aggregate stddev on columns"
 type activity_stddev_fields {
+    estimated_costs: Float
+    estimated_duration: Float
     estimated_duration_in_hours: Float
     estimated_pricing: Float
     gainable_xp: Float
@@ -190,6 +200,8 @@ type activity_stddev_fields {
 
 "aggregate stddev_pop on columns"
 type activity_stddev_pop_fields {
+    estimated_costs: Float
+    estimated_duration: Float
     estimated_duration_in_hours: Float
     estimated_pricing: Float
     gainable_xp: Float
@@ -197,6 +209,8 @@ type activity_stddev_pop_fields {
 
 "aggregate stddev_samp on columns"
 type activity_stddev_samp_fields {
+    estimated_costs: Float
+    estimated_duration: Float
     estimated_duration_in_hours: Float
     estimated_pricing: Float
     gainable_xp: Float
@@ -204,6 +218,8 @@ type activity_stddev_samp_fields {
 
 "aggregate sum on columns"
 type activity_sum_fields {
+    estimated_costs: float8
+    estimated_duration: float8
     estimated_duration_in_hours: numeric
     estimated_pricing: numeric
     gainable_xp: Int
@@ -211,6 +227,8 @@ type activity_sum_fields {
 
 "aggregate var_pop on columns"
 type activity_var_pop_fields {
+    estimated_costs: Float
+    estimated_duration: Float
     estimated_duration_in_hours: Float
     estimated_pricing: Float
     gainable_xp: Float
@@ -218,6 +236,8 @@ type activity_var_pop_fields {
 
 "aggregate var_samp on columns"
 type activity_var_samp_fields {
+    estimated_costs: Float
+    estimated_duration: Float
     estimated_duration_in_hours: Float
     estimated_pricing: Float
     gainable_xp: Float
@@ -225,6 +245,8 @@ type activity_var_samp_fields {
 
 "aggregate variance on columns"
 type activity_variance_fields {
+    estimated_costs: Float
+    estimated_duration: Float
     estimated_duration_in_hours: Float
     estimated_pricing: Float
     gainable_xp: Float
@@ -1871,6 +1893,10 @@ enum activity_select_column {
     "column name"
     description
     "column name"
+    estimated_costs
+    "column name"
+    estimated_duration
+    "column name"
     estimated_duration_in_hours
     "column name"
     estimated_pricing
@@ -1918,6 +1944,10 @@ enum activity_update_column {
     coordinates
     "column name"
     description
+    "column name"
+    estimated_costs
+    "column name"
+    estimated_duration
     "column name"
     estimated_duration_in_hours
     "column name"
@@ -2109,6 +2139,8 @@ enum pet_update_column {
 
 "unique or primary key constraints on table \"user_activity\""
 enum user_activity_constraint {
+    "unique or primary key constraint on columns \"status\", \"activity_id\", \"user_id\""
+    user_activity_activity_id_status_user_id_key
     "unique or primary key constraint on columns \"id\""
     user_activity_pkey
 }
@@ -2181,6 +2213,8 @@ enum user_update_column {
 
 scalar bigint
 
+scalar float8
+
 scalar jsonb
 
 scalar numeric
@@ -2247,6 +2281,8 @@ input activity_bool_exp {
     _or: [activity_bool_exp!]
     coordinates: jsonb_comparison_exp
     description: String_comparison_exp
+    estimated_costs: float8_comparison_exp
+    estimated_duration: float8_comparison_exp
     estimated_duration_in_hours: numeric_comparison_exp
     estimated_pricing: numeric_comparison_exp
     gainable_xp: Int_comparison_exp
@@ -2278,6 +2314,8 @@ input activity_delete_key_input {
 
 "input type for incrementing numeric columns in table \"activity\""
 input activity_inc_input {
+    estimated_costs: float8
+    estimated_duration: float8
     estimated_duration_in_hours: numeric
     estimated_pricing: numeric
     gainable_xp: Int
@@ -2287,6 +2325,8 @@ input activity_inc_input {
 input activity_insert_input {
     coordinates: jsonb
     description: String
+    estimated_costs: float8
+    estimated_duration: float8
     estimated_duration_in_hours: numeric
     estimated_pricing: numeric
     gainable_xp: Int
@@ -2317,6 +2357,8 @@ input activity_on_conflict {
 input activity_order_by {
     coordinates: order_by
     description: order_by
+    estimated_costs: order_by
+    estimated_duration: order_by
     estimated_duration_in_hours: order_by
     estimated_pricing: order_by
     gainable_xp: order_by
@@ -2343,6 +2385,8 @@ input activity_prepend_input {
 input activity_set_input {
     coordinates: jsonb
     description: String
+    estimated_costs: float8
+    estimated_duration: float8
     estimated_duration_in_hours: numeric
     estimated_pricing: numeric
     gainable_xp: Int
@@ -2435,6 +2479,8 @@ input activity_stream_cursor_input {
 input activity_stream_cursor_value_input {
     coordinates: jsonb
     description: String
+    estimated_costs: float8
+    estimated_duration: float8
     estimated_duration_in_hours: numeric
     estimated_pricing: numeric
     gainable_xp: Int
@@ -2474,6 +2520,19 @@ input bigint_comparison_exp {
     _lte: bigint
     _neq: bigint
     _nin: [bigint!]
+}
+
+"Boolean expression to compare columns of type \"float8\". All fields are combined with logical 'AND'."
+input float8_comparison_exp {
+    _eq: float8
+    _gt: float8
+    _gte: float8
+    _in: [float8!]
+    _is_null: Boolean
+    _lt: float8
+    _lte: float8
+    _neq: float8
+    _nin: [float8!]
 }
 
 input interaction_aggregate_bool_exp {

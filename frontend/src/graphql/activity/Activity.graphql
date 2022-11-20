@@ -5,8 +5,8 @@ fragment Activity on activity {
     description
     short_description
     gainable_xp
-    estimated_duration_in_hours
-    estimated_pricing
+    estimated_duration
+    estimated_costs
     coordinates
     likes {
         id

@@ -14,6 +14,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   bigint: any;
+  float8: any;
   jsonb: any;
   numeric: any;
   timestamptz: any;
@@ -71,6 +72,8 @@ export type Activity = {
   __typename?: 'activity';
   coordinates?: Maybe<Scalars['jsonb']>;
   description: Scalars['String'];
+  estimated_costs?: Maybe<Scalars['float8']>;
+  estimated_duration?: Maybe<Scalars['float8']>;
   estimated_duration_in_hours?: Maybe<Scalars['numeric']>;
   estimated_pricing?: Maybe<Scalars['numeric']>;
   gainable_xp?: Maybe<Scalars['Int']>;
@@ -173,6 +176,8 @@ export type Activity_Append_Input = {
 /** aggregate avg on columns */
 export type Activity_Avg_Fields = {
   __typename?: 'activity_avg_fields';
+  estimated_costs?: Maybe<Scalars['Float']>;
+  estimated_duration?: Maybe<Scalars['Float']>;
   estimated_duration_in_hours?: Maybe<Scalars['Float']>;
   estimated_pricing?: Maybe<Scalars['Float']>;
   gainable_xp?: Maybe<Scalars['Float']>;
@@ -185,6 +190,8 @@ export type Activity_Bool_Exp = {
   _or?: InputMaybe<Array<Activity_Bool_Exp>>;
   coordinates?: InputMaybe<Jsonb_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
+  estimated_costs?: InputMaybe<Float8_Comparison_Exp>;
+  estimated_duration?: InputMaybe<Float8_Comparison_Exp>;
   estimated_duration_in_hours?: InputMaybe<Numeric_Comparison_Exp>;
   estimated_pricing?: InputMaybe<Numeric_Comparison_Exp>;
   gainable_xp?: InputMaybe<Int_Comparison_Exp>;
@@ -224,6 +231,8 @@ export type Activity_Delete_Key_Input = {
 
 /** input type for incrementing numeric columns in table "activity" */
 export type Activity_Inc_Input = {
+  estimated_costs?: InputMaybe<Scalars['float8']>;
+  estimated_duration?: InputMaybe<Scalars['float8']>;
   estimated_duration_in_hours?: InputMaybe<Scalars['numeric']>;
   estimated_pricing?: InputMaybe<Scalars['numeric']>;
   gainable_xp?: InputMaybe<Scalars['Int']>;
@@ -233,6 +242,8 @@ export type Activity_Inc_Input = {
 export type Activity_Insert_Input = {
   coordinates?: InputMaybe<Scalars['jsonb']>;
   description?: InputMaybe<Scalars['String']>;
+  estimated_costs?: InputMaybe<Scalars['float8']>;
+  estimated_duration?: InputMaybe<Scalars['float8']>;
   estimated_duration_in_hours?: InputMaybe<Scalars['numeric']>;
   estimated_pricing?: InputMaybe<Scalars['numeric']>;
   gainable_xp?: InputMaybe<Scalars['Int']>;
@@ -249,6 +260,8 @@ export type Activity_Insert_Input = {
 export type Activity_Max_Fields = {
   __typename?: 'activity_max_fields';
   description?: Maybe<Scalars['String']>;
+  estimated_costs?: Maybe<Scalars['float8']>;
+  estimated_duration?: Maybe<Scalars['float8']>;
   estimated_duration_in_hours?: Maybe<Scalars['numeric']>;
   estimated_pricing?: Maybe<Scalars['numeric']>;
   gainable_xp?: Maybe<Scalars['Int']>;
@@ -263,6 +276,8 @@ export type Activity_Max_Fields = {
 export type Activity_Min_Fields = {
   __typename?: 'activity_min_fields';
   description?: Maybe<Scalars['String']>;
+  estimated_costs?: Maybe<Scalars['float8']>;
+  estimated_duration?: Maybe<Scalars['float8']>;
   estimated_duration_in_hours?: Maybe<Scalars['numeric']>;
   estimated_pricing?: Maybe<Scalars['numeric']>;
   gainable_xp?: Maybe<Scalars['Int']>;
@@ -300,6 +315,8 @@ export type Activity_On_Conflict = {
 export type Activity_Order_By = {
   coordinates?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
+  estimated_costs?: InputMaybe<Order_By>;
+  estimated_duration?: InputMaybe<Order_By>;
   estimated_duration_in_hours?: InputMaybe<Order_By>;
   estimated_pricing?: InputMaybe<Order_By>;
   gainable_xp?: InputMaybe<Order_By>;
@@ -329,6 +346,10 @@ export enum Activity_Select_Column {
   /** column name */
   Description = 'description',
   /** column name */
+  EstimatedCosts = 'estimated_costs',
+  /** column name */
+  EstimatedDuration = 'estimated_duration',
+  /** column name */
   EstimatedDurationInHours = 'estimated_duration_in_hours',
   /** column name */
   EstimatedPricing = 'estimated_pricing',
@@ -350,6 +371,8 @@ export enum Activity_Select_Column {
 export type Activity_Set_Input = {
   coordinates?: InputMaybe<Scalars['jsonb']>;
   description?: InputMaybe<Scalars['String']>;
+  estimated_costs?: InputMaybe<Scalars['float8']>;
+  estimated_duration?: InputMaybe<Scalars['float8']>;
   estimated_duration_in_hours?: InputMaybe<Scalars['numeric']>;
   estimated_pricing?: InputMaybe<Scalars['numeric']>;
   gainable_xp?: InputMaybe<Scalars['Int']>;
@@ -506,6 +529,8 @@ export type Activity_Status_Updates = {
 /** aggregate stddev on columns */
 export type Activity_Stddev_Fields = {
   __typename?: 'activity_stddev_fields';
+  estimated_costs?: Maybe<Scalars['Float']>;
+  estimated_duration?: Maybe<Scalars['Float']>;
   estimated_duration_in_hours?: Maybe<Scalars['Float']>;
   estimated_pricing?: Maybe<Scalars['Float']>;
   gainable_xp?: Maybe<Scalars['Float']>;
@@ -514,6 +539,8 @@ export type Activity_Stddev_Fields = {
 /** aggregate stddev_pop on columns */
 export type Activity_Stddev_Pop_Fields = {
   __typename?: 'activity_stddev_pop_fields';
+  estimated_costs?: Maybe<Scalars['Float']>;
+  estimated_duration?: Maybe<Scalars['Float']>;
   estimated_duration_in_hours?: Maybe<Scalars['Float']>;
   estimated_pricing?: Maybe<Scalars['Float']>;
   gainable_xp?: Maybe<Scalars['Float']>;
@@ -522,6 +549,8 @@ export type Activity_Stddev_Pop_Fields = {
 /** aggregate stddev_samp on columns */
 export type Activity_Stddev_Samp_Fields = {
   __typename?: 'activity_stddev_samp_fields';
+  estimated_costs?: Maybe<Scalars['Float']>;
+  estimated_duration?: Maybe<Scalars['Float']>;
   estimated_duration_in_hours?: Maybe<Scalars['Float']>;
   estimated_pricing?: Maybe<Scalars['Float']>;
   gainable_xp?: Maybe<Scalars['Float']>;
@@ -539,6 +568,8 @@ export type Activity_Stream_Cursor_Input = {
 export type Activity_Stream_Cursor_Value_Input = {
   coordinates?: InputMaybe<Scalars['jsonb']>;
   description?: InputMaybe<Scalars['String']>;
+  estimated_costs?: InputMaybe<Scalars['float8']>;
+  estimated_duration?: InputMaybe<Scalars['float8']>;
   estimated_duration_in_hours?: InputMaybe<Scalars['numeric']>;
   estimated_pricing?: InputMaybe<Scalars['numeric']>;
   gainable_xp?: InputMaybe<Scalars['Int']>;
@@ -552,6 +583,8 @@ export type Activity_Stream_Cursor_Value_Input = {
 /** aggregate sum on columns */
 export type Activity_Sum_Fields = {
   __typename?: 'activity_sum_fields';
+  estimated_costs?: Maybe<Scalars['float8']>;
+  estimated_duration?: Maybe<Scalars['float8']>;
   estimated_duration_in_hours?: Maybe<Scalars['numeric']>;
   estimated_pricing?: Maybe<Scalars['numeric']>;
   gainable_xp?: Maybe<Scalars['Int']>;
@@ -563,6 +596,10 @@ export enum Activity_Update_Column {
   Coordinates = 'coordinates',
   /** column name */
   Description = 'description',
+  /** column name */
+  EstimatedCosts = 'estimated_costs',
+  /** column name */
+  EstimatedDuration = 'estimated_duration',
   /** column name */
   EstimatedDurationInHours = 'estimated_duration_in_hours',
   /** column name */
@@ -602,6 +639,8 @@ export type Activity_Updates = {
 /** aggregate var_pop on columns */
 export type Activity_Var_Pop_Fields = {
   __typename?: 'activity_var_pop_fields';
+  estimated_costs?: Maybe<Scalars['Float']>;
+  estimated_duration?: Maybe<Scalars['Float']>;
   estimated_duration_in_hours?: Maybe<Scalars['Float']>;
   estimated_pricing?: Maybe<Scalars['Float']>;
   gainable_xp?: Maybe<Scalars['Float']>;
@@ -610,6 +649,8 @@ export type Activity_Var_Pop_Fields = {
 /** aggregate var_samp on columns */
 export type Activity_Var_Samp_Fields = {
   __typename?: 'activity_var_samp_fields';
+  estimated_costs?: Maybe<Scalars['Float']>;
+  estimated_duration?: Maybe<Scalars['Float']>;
   estimated_duration_in_hours?: Maybe<Scalars['Float']>;
   estimated_pricing?: Maybe<Scalars['Float']>;
   gainable_xp?: Maybe<Scalars['Float']>;
@@ -618,6 +659,8 @@ export type Activity_Var_Samp_Fields = {
 /** aggregate variance on columns */
 export type Activity_Variance_Fields = {
   __typename?: 'activity_variance_fields';
+  estimated_costs?: Maybe<Scalars['Float']>;
+  estimated_duration?: Maybe<Scalars['Float']>;
   estimated_duration_in_hours?: Maybe<Scalars['Float']>;
   estimated_pricing?: Maybe<Scalars['Float']>;
   gainable_xp?: Maybe<Scalars['Float']>;
@@ -643,6 +686,19 @@ export enum Cursor_Ordering {
   /** descending ordering of the cursor */
   Desc = 'DESC'
 }
+
+/** Boolean expression to compare columns of type "float8". All fields are combined with logical 'AND'. */
+export type Float8_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['float8']>;
+  _gt?: InputMaybe<Scalars['float8']>;
+  _gte?: InputMaybe<Scalars['float8']>;
+  _in?: InputMaybe<Array<Scalars['float8']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['float8']>;
+  _lte?: InputMaybe<Scalars['float8']>;
+  _neq?: InputMaybe<Scalars['float8']>;
+  _nin?: InputMaybe<Array<Scalars['float8']>>;
+};
 
 /** columns and relationships of "interaction" */
 export type Interaction = {
@@ -3776,7 +3832,7 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
-export type ActivityFragment = { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration_in_hours?: any | null, estimated_pricing?: any | null, coordinates?: any | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> };
+export type ActivityFragment = { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration?: any | null, estimated_costs?: any | null, coordinates?: any | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> };
 
 export type GetActivitiesQueryVariables = Exact<{
   excludedIds: Array<Scalars['uuid']> | Scalars['uuid'];
@@ -3790,19 +3846,19 @@ export type GetActivityQueryVariables = Exact<{
 }>;
 
 
-export type GetActivityQuery = { __typename?: 'query_root', activity_by_pk?: { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration_in_hours?: any | null, estimated_pricing?: any | null, coordinates?: any | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> } | null };
+export type GetActivityQuery = { __typename?: 'query_root', activity_by_pk?: { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration?: any | null, estimated_costs?: any | null, coordinates?: any | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> } | null };
 
 export type GetUserActivitiesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUserActivitiesQuery = { __typename?: 'query_root', user_activity: Array<{ __typename?: 'user_activity', due_to: any, status: Activity_Status_Enum, activity: { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration_in_hours?: any | null, estimated_pricing?: any | null, coordinates?: any | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> } }> };
+export type GetUserActivitiesQuery = { __typename?: 'query_root', user_activity: Array<{ __typename?: 'user_activity', due_to: any, status: Activity_Status_Enum, activity: { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration?: any | null, estimated_costs?: any | null, coordinates?: any | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> } }> };
 
 export type SearchActivitiesQueryVariables = Exact<{
   query: Scalars['String'];
 }>;
 
 
-export type SearchActivitiesQuery = { __typename?: 'query_root', activity: Array<{ __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration_in_hours?: any | null, estimated_pricing?: any | null, coordinates?: any | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> }> };
+export type SearchActivitiesQuery = { __typename?: 'query_root', activity: Array<{ __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration?: any | null, estimated_costs?: any | null, coordinates?: any | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> }> };
 
 export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3819,8 +3875,8 @@ export const ActivityFragmentDoc = gql`
   description
   short_description
   gainable_xp
-  estimated_duration_in_hours
-  estimated_pricing
+  estimated_duration
+  estimated_costs
   coordinates
   likes {
     id
