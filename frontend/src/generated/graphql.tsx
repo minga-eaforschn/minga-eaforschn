@@ -3376,8 +3376,8 @@ export type User_Activity_Bool_Exp = {
 
 /** unique or primary key constraints on table "user_activity" */
 export enum User_Activity_Constraint {
-  /** unique or primary key constraint on columns "status", "activity_id", "user_id" */
-  UserActivityActivityIdStatusUserIdKey = 'user_activity_activity_id_status_user_id_key',
+  /** unique or primary key constraint on columns "activity_id", "user_id" */
+  UserActivityActivityIdUserIdKey = 'user_activity_activity_id_user_id_key',
   /** unique or primary key constraint on columns "id" */
   UserActivityPkey = 'user_activity_pkey'
 }
@@ -3881,6 +3881,13 @@ export type Uuid_Comparison_Exp = {
 
 export type ActivityFragment = { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration?: any | null, estimated_costs?: any | null, coordinates?: any | null, website_url?: string | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> };
 
+export type CompleteActivityMutationVariables = Exact<{
+  object: User_Activity_Insert_Input;
+}>;
+
+
+export type CompleteActivityMutation = { __typename?: 'mutation_root', insert_user_activity_one?: { __typename?: 'user_activity', id: number } | null };
+
 export type GetActivitiesQueryVariables = Exact<{
   excludedIds: Array<Scalars['uuid']> | Scalars['uuid'];
 }>;
@@ -3894,6 +3901,13 @@ export type GetActivityQueryVariables = Exact<{
 
 
 export type GetActivityQuery = { __typename?: 'query_root', activity_by_pk?: { __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration?: any | null, estimated_costs?: any | null, coordinates?: any | null, website_url?: string | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> } | null };
+
+export type GetFactsQueryVariables = Exact<{
+  selectedActivity: Scalars['uuid'];
+}>;
+
+
+export type GetFactsQuery = { __typename?: 'query_root', interaction: Array<{ __typename?: 'interaction', id: any, text: string, type: Interaction_Type_Enum }> };
 
 export type GetUserActivitiesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3949,6 +3963,42 @@ export const UserFragmentDoc = gql`
   total_xp
 }
     `;
+export const CompleteActivityDocument = gql`
+    mutation CompleteActivity($object: user_activity_insert_input!) {
+  insert_user_activity_one(
+    object: $object
+    on_conflict: {constraint: user_activity_activity_id_user_id_key, update_columns: []}
+  ) {
+    id
+  }
+}
+    `;
+export type CompleteActivityMutationFn = Apollo.MutationFunction<CompleteActivityMutation, CompleteActivityMutationVariables>;
+
+/**
+ * __useCompleteActivityMutation__
+ *
+ * To run a mutation, you first call `useCompleteActivityMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCompleteActivityMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [completeActivityMutation, { data, loading, error }] = useCompleteActivityMutation({
+ *   variables: {
+ *      object: // value for 'object'
+ *   },
+ * });
+ */
+export function useCompleteActivityMutation(baseOptions?: Apollo.MutationHookOptions<CompleteActivityMutation, CompleteActivityMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CompleteActivityMutation, CompleteActivityMutationVariables>(CompleteActivityDocument, options);
+      }
+export type CompleteActivityMutationHookResult = ReturnType<typeof useCompleteActivityMutation>;
+export type CompleteActivityMutationResult = Apollo.MutationResult<CompleteActivityMutation>;
+export type CompleteActivityMutationOptions = Apollo.BaseMutationOptions<CompleteActivityMutation, CompleteActivityMutationVariables>;
 export const GetActivitiesDocument = gql`
     query GetActivities($excludedIds: [uuid!]!) {
   activity(
@@ -4023,6 +4073,43 @@ export function useGetActivityLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type GetActivityQueryHookResult = ReturnType<typeof useGetActivityQuery>;
 export type GetActivityLazyQueryHookResult = ReturnType<typeof useGetActivityLazyQuery>;
 export type GetActivityQueryResult = Apollo.QueryResult<GetActivityQuery, GetActivityQueryVariables>;
+export const GetFactsDocument = gql`
+    query GetFacts($selectedActivity: uuid!) {
+  interaction(where: {activity_id: {_eq: $selectedActivity}}) {
+    id
+    text
+    type
+  }
+}
+    `;
+
+/**
+ * __useGetFactsQuery__
+ *
+ * To run a query within a React component, call `useGetFactsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetFactsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetFactsQuery({
+ *   variables: {
+ *      selectedActivity: // value for 'selectedActivity'
+ *   },
+ * });
+ */
+export function useGetFactsQuery(baseOptions: Apollo.QueryHookOptions<GetFactsQuery, GetFactsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetFactsQuery, GetFactsQueryVariables>(GetFactsDocument, options);
+      }
+export function useGetFactsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetFactsQuery, GetFactsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetFactsQuery, GetFactsQueryVariables>(GetFactsDocument, options);
+        }
+export type GetFactsQueryHookResult = ReturnType<typeof useGetFactsQuery>;
+export type GetFactsLazyQueryHookResult = ReturnType<typeof useGetFactsLazyQuery>;
+export type GetFactsQueryResult = Apollo.QueryResult<GetFactsQuery, GetFactsQueryVariables>;
 export const GetUserActivitiesDocument = gql`
     query GetUserActivities {
   user_activity(where: {user_id: {_eq: 1}}) {
@@ -4105,7 +4192,7 @@ export const StartActivityDocument = gql`
     mutation StartActivity($object: user_activity_insert_input!) {
   insert_user_activity_one(
     object: $object
-    on_conflict: {constraint: user_activity_activity_id_status_user_id_key, update_columns: []}
+    on_conflict: {constraint: user_activity_activity_id_user_id_key, update_columns: []}
   ) {
     id
   }
