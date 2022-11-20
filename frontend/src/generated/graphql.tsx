@@ -3909,6 +3909,13 @@ export type SearchActivitiesQueryVariables = Exact<{
 
 export type SearchActivitiesQuery = { __typename?: 'query_root', activity: Array<{ __typename?: 'activity', image_url: string, id: any, name: string, description: string, short_description: string, gainable_xp?: number | null, estimated_duration?: any | null, estimated_costs?: any | null, coordinates?: any | null, website_url?: string | null, likes: Array<{ __typename?: 'like', id: any, user_id: number }> }> };
 
+export type StartActivityMutationVariables = Exact<{
+  object: User_Activity_Insert_Input;
+}>;
+
+
+export type StartActivityMutation = { __typename?: 'mutation_root', insert_user_activity_one?: { __typename?: 'user_activity', id: number } | null };
+
 export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -4094,6 +4101,42 @@ export function useSearchActivitiesLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type SearchActivitiesQueryHookResult = ReturnType<typeof useSearchActivitiesQuery>;
 export type SearchActivitiesLazyQueryHookResult = ReturnType<typeof useSearchActivitiesLazyQuery>;
 export type SearchActivitiesQueryResult = Apollo.QueryResult<SearchActivitiesQuery, SearchActivitiesQueryVariables>;
+export const StartActivityDocument = gql`
+    mutation StartActivity($object: user_activity_insert_input!) {
+  insert_user_activity_one(
+    object: $object
+    on_conflict: {constraint: user_activity_activity_id_status_user_id_key, update_columns: []}
+  ) {
+    id
+  }
+}
+    `;
+export type StartActivityMutationFn = Apollo.MutationFunction<StartActivityMutation, StartActivityMutationVariables>;
+
+/**
+ * __useStartActivityMutation__
+ *
+ * To run a mutation, you first call `useStartActivityMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useStartActivityMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [startActivityMutation, { data, loading, error }] = useStartActivityMutation({
+ *   variables: {
+ *      object: // value for 'object'
+ *   },
+ * });
+ */
+export function useStartActivityMutation(baseOptions?: Apollo.MutationHookOptions<StartActivityMutation, StartActivityMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<StartActivityMutation, StartActivityMutationVariables>(StartActivityDocument, options);
+      }
+export type StartActivityMutationHookResult = ReturnType<typeof useStartActivityMutation>;
+export type StartActivityMutationResult = Apollo.MutationResult<StartActivityMutation>;
+export type StartActivityMutationOptions = Apollo.BaseMutationOptions<StartActivityMutation, StartActivityMutationVariables>;
 export const GetUserDocument = gql`
     query GetUser {
   user_by_pk(id: 1) {

@@ -2,7 +2,11 @@ import "./activity-result.css";
 import Box from "@mui/material/Box";
 import React from "react";
 import { useNavigate, useParams } from "react-router";
-import { useGetActivityQuery } from "../../generated/graphql";
+import {
+  Activity_Status_Enum,
+  useGetActivityQuery,
+  useStartActivityMutation,
+} from "../../generated/graphql";
 import Center from "../../components/Center";
 import {
   Card,
@@ -16,7 +20,7 @@ import Button from "@mui/material/Button";
 import { Scoreboard } from "@mui/icons-material";
 import CostCard from "../../components/CostCard";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-
+import moment from "moment";
 const ActivityResult: React.FC = (props) => {
   const { activityId } = useParams();
   const navigate = useNavigate();
@@ -25,6 +29,8 @@ const ActivityResult: React.FC = (props) => {
       id: activityId,
     },
   });
+  const [startActivityMutation] = useStartActivityMutation();
+  const [startingActivity, setStartingActivity] = React.useState(false);
   if (loading) {
     return (
       <Center>
@@ -149,14 +155,33 @@ const ActivityResult: React.FC = (props) => {
             Discard
           </Button>
           <Button
-            onClick={() => {
-              navigate("/home/activities", {
-                replace: true,
-              });
+            onClick={async () => {
+              if (startingActivity) {
+                return;
+              }
+              try {
+                setStartingActivity(true);
+                await startActivityMutation({
+                  variables: {
+                    object: {
+                      activity_id: activityId,
+                      user_id: 1,
+                      status: Activity_Status_Enum.Ongoing,
+                      due_to: moment().add(1, "day").toISOString(),
+                    },
+                  },
+                });
+              } finally {
+                setStartingActivity(false);
+                navigate("/home/activities", {
+                  replace: true,
+                });
+              }
             }}
             variant="contained"
           >
             Start exploration
+            {startingActivity && <CircularProgress />}
           </Button>
         </Box>
       </CardContent>
