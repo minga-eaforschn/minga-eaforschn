@@ -24,6 +24,7 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import moment from "moment";
 import MuenchnerKindl from "../../components/MuenchnerKindl";
 import SpeechBubble from "../../components/SpeechBubble";
+
 const ActivityResult: React.FC = (props) => {
   const { activityId } = useParams();
   const navigate = useNavigate();
