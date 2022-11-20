@@ -13,7 +13,7 @@ const calculateSpeechBubbleSize = () => {
     height = 20 + windowHeight / 50;
   }
 
-  const MAX_WIDTH_PERCENTAGE = 100;
+  const MAX_WIDTH_PERCENTAGE = 80;
   if (width > MAX_WIDTH_PERCENTAGE) {
     width = MAX_WIDTH_PERCENTAGE;
   }

@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router";
 import {
   Activity_Status_Enum,
   useGetActivityQuery,
+  useGetFactsQuery,
   useStartActivityMutation,
 } from "../../generated/graphql";
 import Center from "../../components/Center";
@@ -21,6 +22,8 @@ import { Scoreboard } from "@mui/icons-material";
 import CostCard from "../../components/CostCard";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import moment from "moment";
+import MuenchnerKindl from "../../components/MuenchnerKindl";
+import SpeechBubble from "../../components/SpeechBubble";
 const ActivityResult: React.FC = (props) => {
   const { activityId } = useParams();
   const navigate = useNavigate();
@@ -31,6 +34,9 @@ const ActivityResult: React.FC = (props) => {
   });
   const [startActivityMutation] = useStartActivityMutation();
   const [startingActivity, setStartingActivity] = React.useState(false);
+  const { data: facts } = useGetFactsQuery({
+    variables: { selectedActivity: activityId },
+  });
   if (loading) {
     return (
       <Center>
@@ -140,6 +146,12 @@ const ActivityResult: React.FC = (props) => {
             </Card>
           </Box>
         </div>
+        {(facts?.interaction?.length ?? 0) > 0 && (
+          <Box>
+            <MuenchnerKindl></MuenchnerKindl>
+            <Typography>FUN fact: {facts!.interaction[0].text}</Typography>
+          </Box>
+        )}
         <Box
           sx={{ marginTop: "20px" }}
           display={"flex"}
