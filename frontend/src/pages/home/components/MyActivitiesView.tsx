@@ -69,6 +69,7 @@ const MyActivitiesView = () => {
           borderBottomRightRadius: "20px",
           position: "sticky",
           padding: "16px",
+          marginTop: "-15px",
         }}
       >
         My activities

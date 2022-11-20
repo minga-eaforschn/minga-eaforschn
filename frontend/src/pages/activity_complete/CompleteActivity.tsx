@@ -97,15 +97,6 @@ const CompleteActivity = () => {
               "Grias di, congratulations on completing your first challenge! I'm really proud of you."
             }
           />
-          {/*<SpeechBubble*/}
-          {/*  sx={{*/}
-          {/*    position: "absolute",*/}
-          {/*    left: "83%",*/}
-          {/*  }}*/}
-          {/*  text={*/}
-          {/*    "Grias di, congratulations on completing your first challenge! I'm really proud of you."*/}
-          {/*  }*/}
-          {/*/>*/}
         </Box>
       </Box>
     </Box>

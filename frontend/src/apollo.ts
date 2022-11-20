@@ -13,25 +13,10 @@ function loadHeaders() {
   return { "x-hasura-admin-secret": "myadminsecretkey" };
 }
 
-const httpUri = process.env.REACT_APP_GRAPHQL_ENDPOINT
-  ? `${process.env.REACT_APP_GRAPHQL_ENDPOINT}`
-  : `https://api.stephan.vm.selectcode.io/v1/graphql`;
-const wsUri = process.env.REACT_APP_GRAPHQL_WS_ENDPOINT
-  ? `${process.env.REACT_APP_GRAPHQL_WS_ENDPOINT.replace("http", "ws")}`
-  : `ws://localhost:8080/v1/graphql`;
+const httpUri = `https://api.stephan.vm.selectcode.io/v1/graphql`;
 
 const httpLink = new HttpLink({
   uri: httpUri,
-});
-const wsLink = new WebSocketLink({
-  uri: wsUri,
-  options: {
-    reconnect: true,
-    lazy: true,
-    connectionParams: {
-      headers: loadHeaders(),
-    },
-  },
 });
 
 const errorLink = new ApolloLink((operation, forward) => {
@@ -47,17 +32,13 @@ const errorLink = new ApolloLink((operation, forward) => {
   });
 });
 
-const splitLink = split(
-  ({ query }) => {
-    const definition = getMainDefinition(query);
-    return (
-      definition.kind === "OperationDefinition" &&
-      definition.operation === "subscription"
-    );
-  },
-  wsLink,
-  concat(errorLink, httpLink)
-);
+const splitLink = split(({ query }) => {
+  const definition = getMainDefinition(query);
+  return (
+    definition.kind === "OperationDefinition" &&
+    definition.operation === "subscription"
+  );
+}, concat(errorLink, httpLink));
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext({
