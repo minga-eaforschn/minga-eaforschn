@@ -34,12 +34,14 @@ const Header = (kindlProps: { sx?: any }) => {
           <ProfileMPBar />
           <Box width={10} />
 
-          <Typography
-            variant={"caption"}
-            sx={{ marginRight: "3px", fontSize: "1.1em" }}
-          >
-            Stephan (2)
-          </Typography>
+          <Box display={"flex"} flexDirection="column">
+            <Typography variant={"caption"}>Stephan (2)</Typography>
+            <Box height={5} />
+
+            <Typography variant={"caption"} color={"text.secondary"}>
+              Minga Padawan
+            </Typography>
+          </Box>
           {/* TODO make logo and avatar size more equal */}
           <Box width={10} />
           <Avatar src={profilePicture}></Avatar>
