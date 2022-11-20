@@ -1,11 +1,15 @@
-import { Box } from "@mui/material";
+import { Box, SxProps } from "@mui/material";
 import MuenchnerKindlImage from "../assets/MuenchnerKindlPicture.png";
 import SpeechBubble from "./SpeechBubble";
 
 // Speech Bubbles inspired by https://freefrontend.com/css-speech-bubbles/
-const MuenchnerKindl = (kindlProps: { sx?: any; text: string }) => {
+const MuenchnerKindl = (kindlProps: {
+  sx?: SxProps;
+  text?: string;
+  textSx?: SxProps;
+}) => {
   return (
-    <Box>
+    <Box sx={{ display: "flex" }}>
       <Box sx={kindlProps.sx ?? {}}>
         <link
           href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@1,700&display=swap"
@@ -20,10 +24,12 @@ const MuenchnerKindl = (kindlProps: { sx?: any; text: string }) => {
           height={"auto"}
         />
       </Box>
-      <SpeechBubble
-        text={kindlProps.text}
-        sx={{ width: "60%", left: "73%" }}
-      ></SpeechBubble>
+      {kindlProps.text && (
+        <SpeechBubble
+          text={kindlProps.text}
+          sx={kindlProps.textSx}
+        ></SpeechBubble>
+      )}
     </Box>
   );
 };

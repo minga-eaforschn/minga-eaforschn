@@ -133,7 +133,7 @@ const SearchActivitiesView = () => {
                     navigate("/activity/result/" + activity.id);
                   }}
                 >
-                  Start challenge {<PlayArrow />}
+                  Start exploration {<PlayArrow />}
                 </Button>
               </Box>
             </Card>

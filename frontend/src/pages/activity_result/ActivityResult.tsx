@@ -147,7 +147,7 @@ const ActivityResult: React.FC = (props) => {
             }}
             variant="contained"
           >
-            Start challenge
+            Start exploration
           </Button>
         </Box>
       </CardContent>

@@ -7,7 +7,6 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { UploadFile } from "@mui/icons-material";
 import MuenchnerKindl from "../../components/MuenchnerKindl";
-import SpeechBubble from "../../components/SpeechBubble";
 
 const CompleteActivity = () => {
   const { activityId } = useParams<{ activityId: string }>();
@@ -89,12 +88,14 @@ const CompleteActivity = () => {
           </Button>
         </Box>
       </Card>
-      <MuenchnerKindl
-        sx={{ width: "20%" }}
-        text={
-          "Grias di, congratulations on completing your first challenge! I'm really proud of you."
-        }
-      />
+      <Box sx={{ position: "relative", paddingLeft: "5%", paddingTop: "25px" }}>
+        <MuenchnerKindl
+          sx={{ width: "20%", paddingTop: "10px" }}
+          text={
+            "Grias di, congratulations on completing your first exploration! I'm really proud of you."
+          }
+        ></MuenchnerKindl>
+      </Box>
     </Box>
   );
 };

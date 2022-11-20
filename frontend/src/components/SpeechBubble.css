@@ -1,24 +1,11 @@
 .cartoon {
-    position: absolute;
     width: 80vmin;
     height: 80vmin;
-    top: 10rem;
-    right: 35%
-}
-
-@media only screen and (max-width: 700px) {
-    .carton {
-        left: -15rem
-    }
-}
-
-.cartoon div {
-    position: absolute;
     box-sizing: border-box;
 }
 
 .b {
-    border: 0.5vmin solid black;
+    border: 0.3vmin solid black;
 }
 
 .r {
@@ -43,15 +30,16 @@
 .bubble {
     width: 40%;
     height: 25%;
-    /*top: 20%;*/
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-size: 3vmin;
+    font-size: 2.5vmin;
     background: #ffd;
     box-shadow: 0 -0.25vmin, 0 0.125vmin;
     font-family: "Comic Sans", "Comic Neue", sans-serif;
+    box-sizing: border-box;
+    padding: 2rem
 }
 
 /* Animation */

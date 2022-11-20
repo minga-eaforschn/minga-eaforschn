@@ -14,10 +14,6 @@ const Surprise = () => {
             sx={{ width: "55%" }}
             text={"Do you have plans for today?"}
           ></MuenchnerKindl>
-          {/*<SpeechBubble*/}
-          {/*  text={"Do you have plans for today?"}*/}
-          {/*  sx={{ width: "60%", left: "73%" }}*/}
-          {/*></SpeechBubble>*/}
         </Box>
       </Box>
       <Box

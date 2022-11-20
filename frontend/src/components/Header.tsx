@@ -1,4 +1,4 @@
-import { Avatar, Box, Divider, Typography } from "@mui/material";
+import { Avatar, Box, Divider, SxProps, Typography } from "@mui/material";
 import logo from "../assets/MingaEaforschnLogo.png";
 import profilePicture from "../assets/StephanLe.jpeg";
 import Button from "@mui/material/Button";
@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import ProfileMPBar from "./ProfileMPBar";
 
 // Speech Bubbles inspired by https://freefrontend.com/css-speech-bubbles/
-const Header = (kindlProps: { sx?: any }) => {
+const Header = (headerProps: { sx?: SxProps }) => {
   const navigate = useNavigate();
   return (
     <Box
