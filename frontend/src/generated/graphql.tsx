@@ -90,6 +90,7 @@ export type Activity = {
   likes_aggregate: Like_Aggregate;
   name: Scalars['String'];
   short_description: Scalars['String'];
+  updated_at?: Maybe<Scalars['timestamptz']>;
   website_url?: Maybe<Scalars['String']>;
 };
 
@@ -205,6 +206,7 @@ export type Activity_Bool_Exp = {
   likes_aggregate?: InputMaybe<Like_Aggregate_Bool_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
   short_description?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   website_url?: InputMaybe<String_Comparison_Exp>;
 };
 
@@ -256,6 +258,7 @@ export type Activity_Insert_Input = {
   likes?: InputMaybe<Like_Arr_Rel_Insert_Input>;
   name?: InputMaybe<Scalars['String']>;
   short_description?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
   website_url?: InputMaybe<Scalars['String']>;
 };
 
@@ -273,6 +276,7 @@ export type Activity_Max_Fields = {
   image_url?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   short_description?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
   website_url?: Maybe<Scalars['String']>;
 };
 
@@ -290,6 +294,7 @@ export type Activity_Min_Fields = {
   image_url?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   short_description?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
   website_url?: Maybe<Scalars['String']>;
 };
 
@@ -332,6 +337,7 @@ export type Activity_Order_By = {
   likes_aggregate?: InputMaybe<Like_Aggregate_Order_By>;
   name?: InputMaybe<Order_By>;
   short_description?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
   website_url?: InputMaybe<Order_By>;
 };
 
@@ -372,6 +378,8 @@ export enum Activity_Select_Column {
   /** column name */
   ShortDescription = 'short_description',
   /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
   WebsiteUrl = 'website_url'
 }
 
@@ -389,6 +397,7 @@ export type Activity_Set_Input = {
   image_url?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   short_description?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
   website_url?: InputMaybe<Scalars['String']>;
 };
 
@@ -587,6 +596,7 @@ export type Activity_Stream_Cursor_Value_Input = {
   image_url?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   short_description?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
   website_url?: InputMaybe<Scalars['String']>;
 };
 
@@ -626,6 +636,8 @@ export enum Activity_Update_Column {
   Name = 'name',
   /** column name */
   ShortDescription = 'short_description',
+  /** column name */
+  UpdatedAt = 'updated_at',
   /** column name */
   WebsiteUrl = 'website_url'
 }

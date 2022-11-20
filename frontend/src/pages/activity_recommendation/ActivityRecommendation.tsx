@@ -16,6 +16,13 @@ import Button from "@mui/material/Button";
 import { useNavigate, useParams } from "react-router";
 import PixlKindl from "./components/PixlKindl";
 import MpAvatar from "./components/Avatar";
+// @ts-ignore
+import okayLetsGo from "../../assets/sounds/okayLetsGo.mp3";
+const playOkayyLetsGoo = async () => {
+  const audio = new Audio(okayLetsGo);
+  await audio.play();
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+};
 
 const ActivityRecommendation = () => {
   const params = useParams();
@@ -24,7 +31,6 @@ const ActivityRecommendation = () => {
       id: params.id,
     },
   });
-  const theme = useTheme();
   const navigate = useNavigate();
   if (loading) {
     return (
@@ -137,8 +143,9 @@ const ActivityRecommendation = () => {
           }}
         />
         <PixlKindl
-          instruction="Okay, let's gooo"
-          onInteraction={() => {
+          instruction="Okayyy, let's gooo"
+          onInteraction={async () => {
+            await playOkayyLetsGoo();
             navigate(`/activity/result/${activity.id}`);
           }}
         />
