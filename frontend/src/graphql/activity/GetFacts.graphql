@@ -1,0 +1,7 @@
+query GetFacts($selectedActivity: uuid!) {
+    interaction(where: {activity_id: {_eq: $selectedActivity}}) {
+        id
+        text
+        type
+    }
+}
