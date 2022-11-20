@@ -92,16 +92,20 @@ const CompleteActivity = () => {
       </Card>
       <Box position={"absolute"} bottom={40} left={40} right={0}>
         <Box width={"10%"} position={"relative"}>
-          <MuenchnerKindl />
-          <SpeechBubble
-            sx={{
-              position: "absolute",
-              left: "83%",
-            }}
+          <MuenchnerKindl
             text={
               "Grias di, congratulations on completing your first challenge! I'm really proud of you."
             }
           />
+          {/*<SpeechBubble*/}
+          {/*  sx={{*/}
+          {/*    position: "absolute",*/}
+          {/*    left: "83%",*/}
+          {/*  }}*/}
+          {/*  text={*/}
+          {/*    "Grias di, congratulations on completing your first challenge! I'm really proud of you."*/}
+          {/*  }*/}
+          {/*/>*/}
         </Box>
       </Box>
     </Box>

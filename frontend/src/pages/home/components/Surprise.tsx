@@ -10,11 +10,14 @@ const Surprise = () => {
     <Box>
       <Box display="flex" justifyContent="center" alignItems="center">
         <Box sx={{ paddingLeft: "2rem" }}>
-          <MuenchnerKindl sx={{ width: "55%" }}></MuenchnerKindl>
-          <SpeechBubble
+          <MuenchnerKindl
+            sx={{ width: "55%" }}
             text={"Do you have plans for today?"}
-            sx={{ width: "60%", left: "73%" }}
-          ></SpeechBubble>
+          ></MuenchnerKindl>
+          {/*<SpeechBubble*/}
+          {/*  text={"Do you have plans for today?"}*/}
+          {/*  sx={{ width: "60%", left: "73%" }}*/}
+          {/*></SpeechBubble>*/}
         </Box>
       </Box>
       <Box

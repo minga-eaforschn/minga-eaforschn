@@ -1,11 +1,16 @@
 .cartoon {
     position: absolute;
-    left: 40%;
-    transform: translate(-70%, -50%);
     width: 80vmin;
     height: 80vmin;
+    top: 10rem;
+    right: 35%
 }
 
+@media only screen and (max-width: 700px) {
+    .carton {
+        left: -15rem
+    }
+}
 
 .cartoon div {
     position: absolute;
@@ -35,18 +40,6 @@
     --shirt: #fff;
 }
 
-.shirt-line {
-    width: 5%;
-    height: 7%;
-    border-top: 0;
-    border-left: 0;
-    transform: rotate(45deg);
-    top: 69.33%;
-    left: 47.75%;
-    box-shadow: 0vmin 2vmin 0 -0.25vmin var(--shirt), inset -1vmin 0 var(--shirt);
-    clip-path: polygon(0% 200%, 0% 100%, 0% 90%, 85% 90%, 100% 0%, 100% 100%);
-}
-
 .bubble {
     width: 40%;
     height: 25%;
@@ -55,23 +48,10 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-size: 5vmin;
+    font-size: 3vmin;
     background: #ffd;
     box-shadow: 0 -0.25vmin, 0 0.125vmin;
     font-family: "Comic Sans", "Comic Neue", sans-serif;
-}
-
-.line-1{
-    position: relative;
-    top: 50%;
-    width: 24em;
-    margin: 0 auto;
-    border-right: 2px solid rgba(255,255,255,.75);
-    font-size: 180%;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    transform: translateY(-50%);
 }
 
 /* Animation */
