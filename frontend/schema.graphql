@@ -2170,8 +2170,8 @@ enum pet_update_column {
 
 "unique or primary key constraints on table \"user_activity\""
 enum user_activity_constraint {
-    "unique or primary key constraint on columns \"status\", \"activity_id\", \"user_id\""
-    user_activity_activity_id_status_user_id_key
+    "unique or primary key constraint on columns \"activity_id\", \"user_id\""
+    user_activity_activity_id_user_id_key
     "unique or primary key constraint on columns \"id\""
     user_activity_pkey
 }

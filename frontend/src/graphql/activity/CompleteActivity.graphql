@@ -1,4 +1,4 @@
-mutation StartActivity($object: user_activity_insert_input!) {
+mutation CompleteActivity($object: user_activity_insert_input!) {
     insert_user_activity_one(object: $object, on_conflict: {
         constraint: user_activity_activity_id_user_id_key,
         update_columns: [
