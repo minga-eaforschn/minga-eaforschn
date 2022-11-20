@@ -30,7 +30,6 @@ const CompleteActivity = () => {
 
   return (
     <Box
-      minHeight={"100vh"}
       display={"flex"}
       flexDirection={"column"}
       alignItems={"center"}
@@ -90,15 +89,12 @@ const CompleteActivity = () => {
           </Button>
         </Box>
       </Card>
-      <Box position={"absolute"} bottom={40} left={40} right={0}>
-        <Box width={"10%"} position={"relative"}>
-          <MuenchnerKindl
-            text={
-              "Grias di, congratulations on completing your first challenge! I'm really proud of you."
-            }
-          />
-        </Box>
-      </Box>
+      <MuenchnerKindl
+        sx={{ width: "20%" }}
+        text={
+          "Grias di, congratulations on completing your first challenge! I'm really proud of you."
+        }
+      />
     </Box>
   );
 };
