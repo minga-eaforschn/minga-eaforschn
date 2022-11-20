@@ -11,13 +11,12 @@ import {
   CalendarTodayOutlined,
   CheckCircle,
   Done,
-  PendingActions,
   SvgIconComponent,
-  SyncLock,
   TimerOutlined,
 } from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router";
+import Confetti from "react-confetti";
 
 const getIconColor = (status: Activity_Status_Enum) => {
   switch (status) {
@@ -61,6 +60,10 @@ const MyActivitiesView = () => {
   const { data, loading, error } = useGetUserActivitiesQuery();
   const activities = data?.user_activity;
   const navigate = useNavigate();
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  const [showConfetti, setShowConfetti] = React.useState(false);
+
   return (
     <Box>
       <AppBar
@@ -160,6 +163,7 @@ const MyActivitiesView = () => {
           </List>
         )}
       </Box>
+      {showConfetti && <Confetti width={width} height={height} />})
     </Box>
   );
 };
