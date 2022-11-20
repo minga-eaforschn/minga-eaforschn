@@ -7,9 +7,8 @@ import Center from "../../components/Center";
 import { Card, CardContent, CircularProgress, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Payments, Scoreboard } from "@mui/icons-material";
+import { Scoreboard } from "@mui/icons-material";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import { getCostRank } from "../../components/activity-info/cost-rank";
 import CostCard from "../../components/CostCard";
 
 const ActivityResult: React.FC = (props) => {
@@ -52,7 +51,7 @@ const ActivityResult: React.FC = (props) => {
   const lon = coordinates["lon"];
 
   return (
-    <Box>
+    <Box key={`activity-${activity.id}`}>
       <Card
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >

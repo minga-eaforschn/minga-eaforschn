@@ -12,10 +12,10 @@ const CostCard = (props: CostCardProps) => {
     <Card className={"info-card"}>
       <CardContent className={"info-card-content"}>
         {[...Array(getCostRank(props.cost))].map((e, i) => (
-          <Payments />
+          <Payments key={`cost-${i}`} />
         ))}
         {[...Array(3 - getCostRank(props.cost))].map((e, i) => (
-          <Payments color={"disabled"} />
+          <Payments color={"disabled"} key={`cost-disabled-${i}`} />
         ))}
       </CardContent>
     </Card>
