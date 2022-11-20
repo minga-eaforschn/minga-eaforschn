@@ -18,9 +18,17 @@ const CostCard = (props: CostCardProps) => {
         width: "fit-content",
       }}
     >
-      <Typography sx={{ marginBottom: "15px", marginLeft: "10px" }}>
-        {props.cost} €
-      </Typography>
+      {props.cost && (
+        <Typography
+          sx={{
+            marginBottom: "15px",
+            marginLeft: "10px",
+            whiteSpace: "nowrap;",
+          }}
+        >
+          {props.cost} €
+        </Typography>
+      )}
       <CardContent className={"info-card-content"}>
         {[...Array(getCostRank(props.cost))].map((e, i) => (
           <Payments key={`cost-${i}`} />

@@ -16,10 +16,12 @@ const Header = (kindlProps: { sx?: any }) => {
     >
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button
+          sx={{ marginLeft: "5px" }}
           onClick={() => {
             navigate("/home/surprise");
           }}
         >
+          <Box></Box>
           <img src={logo} height={"80px"} width={"auto"} alt={"logo"} />
         </Button>
 
@@ -28,23 +30,55 @@ const Header = (kindlProps: { sx?: any }) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginRight: "10px",
+            // marginRight: "5px",
           }}
         >
-          <ProfileMPBar />
-          <Box width={10} />
-
-          <Box display={"flex"} flexDirection="column">
-            <Typography variant={"caption"}>Stephan (2)</Typography>
-            <Box height={5} />
-
-            <Typography variant={"caption"} color={"text.secondary"}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <ProfileMPBar />
+            <Typography
+              variant={"caption"}
+              color={"text.secondary"}
+              sx={{
+                flexBasis: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               Minga Padawan
             </Typography>
+            {/*<Typography*/}
+            {/*  variant={"caption"}*/}
+            {/*  color={"text.secondary"}*/}
+            {/*  sx={{*/}
+            {/*    flexBasis: "100%",*/}
+            {/*    display: "flex",*/}
+            {/*    justifyContent: "center",*/}
+            {/*    alignItems: "center",*/}
+            {/*  }}*/}
+            {/*>*/}
+            {/*  (Level 2)*/}
+            {/*</Typography>*/}
+          </Box>
+
+          <Box
+            display={"flex"}
+            flexDirection="column"
+            sx={{ marginRight: "5px" }}
+          >
+            <Box>
+              <Avatar src={profilePicture}></Avatar>
+              <Typography variant={"caption"}>Stephan</Typography>
+            </Box>
           </Box>
           {/* TODO make logo and avatar size more equal */}
-          <Box width={10} />
-          <Avatar src={profilePicture}></Avatar>
         </Box>
       </Box>
 

@@ -108,7 +108,7 @@ const ActivityRecommendation = () => {
           }}
         />
         <PixlKindl
-          instruction="Okayyy, let's gooo"
+          instruction="Okay, let's gooo"
           onInteraction={async () => {
             await playOkayyLetsGoo();
             navigate(`/activity/result/${activity.id}`);

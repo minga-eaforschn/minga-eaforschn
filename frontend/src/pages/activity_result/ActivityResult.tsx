@@ -8,7 +8,6 @@ import { Card, CardContent, CircularProgress, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Scoreboard } from "@mui/icons-material";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import CostCard from "../../components/CostCard";
 
 const ActivityResult: React.FC = (props) => {
@@ -47,13 +46,16 @@ const ActivityResult: React.FC = (props) => {
   }
 
   const coordinates = activity.coordinates;
-  const lat = coordinates["lat"];
-  const lon = coordinates["lon"];
 
   return (
     <Box
       key={`activity-${activity.id}`}
-      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        // background: "white",
+      }}
     >
       <CardContent
         sx={{
@@ -63,33 +65,34 @@ const ActivityResult: React.FC = (props) => {
           padding: "50px",
           width: "50%",
           minWidth: "300px",
+          background: "white",
         }}
       >
-        <div
-          id={"map"}
-          style={{
-            height: "500px",
-            borderRadius: "10px",
-          }}
-        >
-          <MapContainer
-            id="osm-map"
-            center={[lat, lon]}
-            zoom={13}
-            scrollWheelZoom={false}
-            style={{ height: "100%", width: "100%" }}
-          >
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker position={[lat, lon]}>
-              <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
-              </Popup>
-            </Marker>
-          </MapContainer>
-        </div>
+        {/*<div*/}
+        {/*  id={"map"}*/}
+        {/*  style={{*/}
+        {/*    height: "500px",*/}
+        {/*    borderRadius: "10px",*/}
+        {/*  }}*/}
+        {/*>*/}
+        {/*  <MapContainer*/}
+        {/*    id="osm-map"*/}
+        {/*    center={[lat, lon]}*/}
+        {/*    zoom={13}*/}
+        {/*    scrollWheelZoom={false}*/}
+        {/*    style={{ height: "100%", width: "100%" }}*/}
+        {/*  >*/}
+        {/*    <TileLayer*/}
+        {/*      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'*/}
+        {/*      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"*/}
+        {/*    />*/}
+        {/*    <Marker position={[lat, lon]}>*/}
+        {/*      <Popup>*/}
+        {/*        A pretty CSS3 popup. <br /> Easily customizable.*/}
+        {/*      </Popup>*/}
+        {/*    </Marker>*/}
+        {/*  </MapContainer>*/}
+        {/*</div>*/}
 
         <div>
           <Typography variant="h2" sx={{ marginTop: "40px" }}>
