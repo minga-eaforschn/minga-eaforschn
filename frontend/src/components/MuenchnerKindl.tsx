@@ -10,19 +10,22 @@ const MuenchnerKindl = (kindlProps: {
 }) => {
   return (
     <Box sx={{ display: "flex" }}>
-      <Box sx={kindlProps.sx ?? {}}>
+      <Box sx={kindlProps.sx ?? { width: "80px" }}>
         <link
           href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@1,700&display=swap"
           rel="stylesheet"
         />
 
-        <img
-          src={MuenchnerKindlImage}
-          loading="lazy"
-          alt={"Münchner Kindl"}
-          width={"100%"}
-          height={"auto"}
-        />
+        <Box minWidth={"100px"}>
+          <img
+            src={MuenchnerKindlImage}
+            id={"findMe"}
+            loading="lazy"
+            alt={"Münchner Kindl"}
+            width={"100%"}
+            height={"auto"}
+          />
+        </Box>
       </Box>
       {kindlProps.text && (
         <SpeechBubble

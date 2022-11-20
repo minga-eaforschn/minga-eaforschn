@@ -93,7 +93,7 @@ const CompleteActivity = () => {
       </Card>
       <Box margin={"10px"}></Box>
       <MuenchnerKindl
-        sx={{ width: "20%", paddingTop: "40px" }}
+        sx={{ width: "20%", paddingTop: "40px", marginLeft: "250px" }}
         text={
           "Grias di, congratulations on completing your first exploration! I'm really proud of you."
         }

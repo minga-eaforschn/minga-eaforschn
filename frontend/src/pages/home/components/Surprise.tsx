@@ -9,7 +9,7 @@ const Surprise = () => {
   return (
     <Box>
       <Box display="flex" justifyContent="center" alignItems="center">
-        <Box sx={{ paddingLeft: "2rem" }}>
+        <Box sx={{ paddingLeft: "2rem", maxWidth: "750px" }}>
           <MuenchnerKindl
             sx={{ width: "55%" }}
             text={"Do you have plans for today?"}
@@ -24,6 +24,7 @@ const Surprise = () => {
           paddingTop: "2rem",
         }}
       >
+        {/*TODO increase button size dynamically*/}
         <Button
           onClick={() => navigate("/activity/recommendation")}
           variant="contained"
