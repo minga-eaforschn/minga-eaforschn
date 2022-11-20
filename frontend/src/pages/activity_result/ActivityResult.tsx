@@ -86,8 +86,7 @@ const ActivityResult: React.FC = (props) => {
         <div
           id={"map"}
           style={{
-            height: "500px",
-            borderRadius: "10px",
+            height: "250px",
           }}
         >
           <MapContainer
