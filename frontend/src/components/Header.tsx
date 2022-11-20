@@ -19,7 +19,7 @@ const Header = (kindlProps: { sx?: any }) => {
             navigate("/home/surprise");
           }}
         >
-          <img src={logo} height={"80px"} width={"auto"} />
+          <img src={logo} height={"80px"} width={"auto"} alt={"logo"} />
         </Button>
 
         <Box
