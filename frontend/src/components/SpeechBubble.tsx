@@ -5,8 +5,12 @@ let windowWidth = window.innerWidth;
 let windowHeight = window.innerHeight;
 
 const calculateSpeechBubbleSize = () => {
-  const width = 100 - windowWidth / 20;
-  const height = 100 - windowHeight / 10;
+  let width = 100 - windowWidth / 20;
+  let height = 100 - windowHeight / 10;
+
+  if (height > 50) {
+    height = 50;
+  }
   return { width: width + "%", height: height + "%" };
 };
 
@@ -18,7 +22,8 @@ const SpeechBubble = (speechBubbleProps: { text: string; sx?: SxProps }) => {
   return (
     <Box className="cartoon">
       <Box className="bubble b r hb" sx={calculateSpeechBubbleSize()}>
-        <span className="anim-typewriter">{speechBubbleProps.text}</span>
+        {/* eslint-disable-next-line react/style-prop-object */}
+        <span className={"type"}>{speechBubbleProps.text}</span>
       </Box>
     </Box>
   );

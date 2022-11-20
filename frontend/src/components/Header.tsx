@@ -16,7 +16,6 @@ const Header = (headerProps: { sx?: SxProps }) => {
     >
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button
-          sx={{ marginLeft: "5px" }}
           onClick={() => {
             navigate("/home/surprise");
           }}
