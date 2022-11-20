@@ -1,9 +1,12 @@
 import { Avatar, Box, Divider, Typography } from "@mui/material";
 import logo from "../assets/MingaEaforschnLogo.png";
 import profilePicture from "../assets/StephanLe.jpeg";
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router";
 
 // Speech Bubbles inspired by https://freefrontend.com/css-speech-bubbles/
 const Header = (kindlProps: { sx?: any }) => {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -11,7 +14,13 @@ const Header = (kindlProps: { sx?: any }) => {
       }}
     >
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <img src={logo} height={"80px"} width={"auto"} />
+        <Button
+          onClick={() => {
+            navigate("/home/surprise");
+          }}
+        >
+          <img src={logo} height={"80px"} width={"auto"} />
+        </Button>
 
         <Box
           sx={{
@@ -28,6 +37,7 @@ const Header = (kindlProps: { sx?: any }) => {
           <Avatar src={profilePicture}></Avatar>
         </Box>
       </Box>
+
       <Divider sx={{ marginTop: "5px", marginBottom: "10px" }} />
     </Box>
   );
