@@ -89,6 +89,7 @@ export type Activity = {
   /** An aggregate relationship */
   likes_aggregate: Like_Aggregate;
   name: Scalars['String'];
+  position?: Maybe<Scalars['Int']>;
   short_description: Scalars['String'];
   updated_at?: Maybe<Scalars['timestamptz']>;
   website_url?: Maybe<Scalars['String']>;
@@ -183,6 +184,7 @@ export type Activity_Avg_Fields = {
   estimated_duration_in_hours?: Maybe<Scalars['Float']>;
   estimated_pricing?: Maybe<Scalars['Float']>;
   gainable_xp?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to filter rows from the table "activity". All fields are combined with a logical 'AND'. */
@@ -205,6 +207,7 @@ export type Activity_Bool_Exp = {
   likes?: InputMaybe<Like_Bool_Exp>;
   likes_aggregate?: InputMaybe<Like_Aggregate_Bool_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
+  position?: InputMaybe<Int_Comparison_Exp>;
   short_description?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   website_url?: InputMaybe<String_Comparison_Exp>;
@@ -215,7 +218,9 @@ export enum Activity_Constraint {
   /** unique or primary key constraint on columns "name" */
   ActivityNameKey = 'activity_name_key',
   /** unique or primary key constraint on columns "id" */
-  ActivityPkey = 'activity_pkey'
+  ActivityPkey = 'activity_pkey',
+  /** unique or primary key constraint on columns "position" */
+  ActivityPositionKey = 'activity_position_key'
 }
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
@@ -240,6 +245,7 @@ export type Activity_Inc_Input = {
   estimated_duration_in_hours?: InputMaybe<Scalars['numeric']>;
   estimated_pricing?: InputMaybe<Scalars['numeric']>;
   gainable_xp?: InputMaybe<Scalars['Int']>;
+  position?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "activity" */
@@ -257,6 +263,7 @@ export type Activity_Insert_Input = {
   interactions?: InputMaybe<Interaction_Arr_Rel_Insert_Input>;
   likes?: InputMaybe<Like_Arr_Rel_Insert_Input>;
   name?: InputMaybe<Scalars['String']>;
+  position?: InputMaybe<Scalars['Int']>;
   short_description?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   website_url?: InputMaybe<Scalars['String']>;
@@ -275,6 +282,7 @@ export type Activity_Max_Fields = {
   id?: Maybe<Scalars['uuid']>;
   image_url?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  position?: Maybe<Scalars['Int']>;
   short_description?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   website_url?: Maybe<Scalars['String']>;
@@ -293,6 +301,7 @@ export type Activity_Min_Fields = {
   id?: Maybe<Scalars['uuid']>;
   image_url?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  position?: Maybe<Scalars['Int']>;
   short_description?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   website_url?: Maybe<Scalars['String']>;
@@ -336,6 +345,7 @@ export type Activity_Order_By = {
   interactions_aggregate?: InputMaybe<Interaction_Aggregate_Order_By>;
   likes_aggregate?: InputMaybe<Like_Aggregate_Order_By>;
   name?: InputMaybe<Order_By>;
+  position?: InputMaybe<Order_By>;
   short_description?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   website_url?: InputMaybe<Order_By>;
@@ -376,6 +386,8 @@ export enum Activity_Select_Column {
   /** column name */
   Name = 'name',
   /** column name */
+  Position = 'position',
+  /** column name */
   ShortDescription = 'short_description',
   /** column name */
   UpdatedAt = 'updated_at',
@@ -396,6 +408,7 @@ export type Activity_Set_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   image_url?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
+  position?: InputMaybe<Scalars['Int']>;
   short_description?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   website_url?: InputMaybe<Scalars['String']>;
@@ -552,6 +565,7 @@ export type Activity_Stddev_Fields = {
   estimated_duration_in_hours?: Maybe<Scalars['Float']>;
   estimated_pricing?: Maybe<Scalars['Float']>;
   gainable_xp?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -562,6 +576,7 @@ export type Activity_Stddev_Pop_Fields = {
   estimated_duration_in_hours?: Maybe<Scalars['Float']>;
   estimated_pricing?: Maybe<Scalars['Float']>;
   gainable_xp?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -572,6 +587,7 @@ export type Activity_Stddev_Samp_Fields = {
   estimated_duration_in_hours?: Maybe<Scalars['Float']>;
   estimated_pricing?: Maybe<Scalars['Float']>;
   gainable_xp?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
 };
 
 /** Streaming cursor of the table "activity" */
@@ -595,6 +611,7 @@ export type Activity_Stream_Cursor_Value_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   image_url?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
+  position?: InputMaybe<Scalars['Int']>;
   short_description?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   website_url?: InputMaybe<Scalars['String']>;
@@ -608,6 +625,7 @@ export type Activity_Sum_Fields = {
   estimated_duration_in_hours?: Maybe<Scalars['numeric']>;
   estimated_pricing?: Maybe<Scalars['numeric']>;
   gainable_xp?: Maybe<Scalars['Int']>;
+  position?: Maybe<Scalars['Int']>;
 };
 
 /** update columns of table "activity" */
@@ -634,6 +652,8 @@ export enum Activity_Update_Column {
   ImageUrl = 'image_url',
   /** column name */
   Name = 'name',
+  /** column name */
+  Position = 'position',
   /** column name */
   ShortDescription = 'short_description',
   /** column name */
@@ -668,6 +688,7 @@ export type Activity_Var_Pop_Fields = {
   estimated_duration_in_hours?: Maybe<Scalars['Float']>;
   estimated_pricing?: Maybe<Scalars['Float']>;
   gainable_xp?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate var_samp on columns */
@@ -678,6 +699,7 @@ export type Activity_Var_Samp_Fields = {
   estimated_duration_in_hours?: Maybe<Scalars['Float']>;
   estimated_pricing?: Maybe<Scalars['Float']>;
   gainable_xp?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate variance on columns */
@@ -688,6 +710,7 @@ export type Activity_Variance_Fields = {
   estimated_duration_in_hours?: Maybe<Scalars['Float']>;
   estimated_pricing?: Maybe<Scalars['Float']>;
   gainable_xp?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'. */
@@ -3863,7 +3886,7 @@ export type GetActivitiesQueryVariables = Exact<{
 }>;
 
 
-export type GetActivitiesQuery = { __typename?: 'query_root', activity: Array<{ __typename?: 'activity', id: any }> };
+export type GetActivitiesQuery = { __typename?: 'query_root', activity: Array<{ __typename?: 'activity', id: any, position?: number | null }> };
 
 export type GetActivityQueryVariables = Exact<{
   id: Scalars['uuid'];
@@ -3920,8 +3943,12 @@ export const UserFragmentDoc = gql`
     `;
 export const GetActivitiesDocument = gql`
     query GetActivities($excludedIds: [uuid!]!) {
-  activity(where: {id: {_nin: $excludedIds}}) {
+  activity(
+    where: {id: {_nin: $excludedIds}}
+    order_by: {position: asc_nulls_last}
+  ) {
     id
+    position
   }
 }
     `;

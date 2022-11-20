@@ -82,7 +82,9 @@ type activity {
         where: like_bool_exp
     ): like_aggregate!
     name: String!
+    position: Int
     short_description: String!
+    updated_at: timestamptz
     website_url: String
 }
 
@@ -114,6 +116,7 @@ type activity_avg_fields {
     estimated_duration_in_hours: Float
     estimated_pricing: Float
     gainable_xp: Float
+    position: Float
 }
 
 "aggregate max on columns"
@@ -128,7 +131,9 @@ type activity_max_fields {
     id: uuid
     image_url: String
     name: String
+    position: Int
     short_description: String
+    updated_at: timestamptz
     website_url: String
 }
 
@@ -144,7 +149,9 @@ type activity_min_fields {
     id: uuid
     image_url: String
     name: String
+    position: Int
     short_description: String
+    updated_at: timestamptz
     website_url: String
 }
 
@@ -199,6 +206,7 @@ type activity_stddev_fields {
     estimated_duration_in_hours: Float
     estimated_pricing: Float
     gainable_xp: Float
+    position: Float
 }
 
 "aggregate stddev_pop on columns"
@@ -208,6 +216,7 @@ type activity_stddev_pop_fields {
     estimated_duration_in_hours: Float
     estimated_pricing: Float
     gainable_xp: Float
+    position: Float
 }
 
 "aggregate stddev_samp on columns"
@@ -217,6 +226,7 @@ type activity_stddev_samp_fields {
     estimated_duration_in_hours: Float
     estimated_pricing: Float
     gainable_xp: Float
+    position: Float
 }
 
 "aggregate sum on columns"
@@ -226,6 +236,7 @@ type activity_sum_fields {
     estimated_duration_in_hours: numeric
     estimated_pricing: numeric
     gainable_xp: Int
+    position: Int
 }
 
 "aggregate var_pop on columns"
@@ -235,6 +246,7 @@ type activity_var_pop_fields {
     estimated_duration_in_hours: Float
     estimated_pricing: Float
     gainable_xp: Float
+    position: Float
 }
 
 "aggregate var_samp on columns"
@@ -244,6 +256,7 @@ type activity_var_samp_fields {
     estimated_duration_in_hours: Float
     estimated_pricing: Float
     gainable_xp: Float
+    position: Float
 }
 
 "aggregate variance on columns"
@@ -253,6 +266,7 @@ type activity_variance_fields {
     estimated_duration_in_hours: Float
     estimated_pricing: Float
     gainable_xp: Float
+    position: Float
 }
 
 "columns and relationships of \"interaction\""
@@ -1887,6 +1901,8 @@ enum activity_constraint {
     activity_name_key
     "unique or primary key constraint on columns \"id\""
     activity_pkey
+    "unique or primary key constraint on columns \"position\""
+    activity_position_key
 }
 
 "select columns of table \"activity\""
@@ -1914,7 +1930,11 @@ enum activity_select_column {
     "column name"
     name
     "column name"
+    position
+    "column name"
     short_description
+    "column name"
+    updated_at
     "column name"
     website_url
 }
@@ -1968,7 +1988,11 @@ enum activity_update_column {
     "column name"
     name
     "column name"
+    position
+    "column name"
     short_description
+    "column name"
+    updated_at
     "column name"
     website_url
 }
@@ -2301,7 +2325,9 @@ input activity_bool_exp {
     likes: like_bool_exp
     likes_aggregate: like_aggregate_bool_exp
     name: String_comparison_exp
+    position: Int_comparison_exp
     short_description: String_comparison_exp
+    updated_at: timestamptz_comparison_exp
     website_url: String_comparison_exp
 }
 
@@ -2327,6 +2353,7 @@ input activity_inc_input {
     estimated_duration_in_hours: numeric
     estimated_pricing: numeric
     gainable_xp: Int
+    position: Int
 }
 
 "input type for inserting data into table \"activity\""
@@ -2344,7 +2371,9 @@ input activity_insert_input {
     interactions: interaction_arr_rel_insert_input
     likes: like_arr_rel_insert_input
     name: String
+    position: Int
     short_description: String
+    updated_at: timestamptz
     website_url: String
 }
 
@@ -2377,7 +2406,9 @@ input activity_order_by {
     interactions_aggregate: interaction_aggregate_order_by
     likes_aggregate: like_aggregate_order_by
     name: order_by
+    position: order_by
     short_description: order_by
+    updated_at: order_by
     website_url: order_by
 }
 
@@ -2404,7 +2435,9 @@ input activity_set_input {
     id: uuid
     image_url: String
     name: String
+    position: Int
     short_description: String
+    updated_at: timestamptz
     website_url: String
 }
 
@@ -2499,7 +2532,9 @@ input activity_stream_cursor_value_input {
     id: uuid
     image_url: String
     name: String
+    position: Int
     short_description: String
+    updated_at: timestamptz
     website_url: String
 }
 

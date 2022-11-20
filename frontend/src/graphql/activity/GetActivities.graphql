@@ -1,7 +1,6 @@
 query GetActivities($excludedIds: [uuid!]!) {
-    activity (where: {
-        id: {_nin: $excludedIds}
-    }){
+    activity(where: {id: {_nin: $excludedIds}}, order_by: {position: asc_nulls_last}) {
         id
+        position
     }
 }
