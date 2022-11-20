@@ -11,12 +11,11 @@ import {
 import React from "react";
 import {
   ActivityFragment,
-  User_Activity,
   useSearchActivitiesQuery,
 } from "../../../generated/graphql";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { PlayArrow, ThumbUp } from "@mui/icons-material";
+import { PlayArrow, SearchOutlined, ThumbUp } from "@mui/icons-material";
 import { useNavigate } from "react-router";
 
 interface SearchBarProps {
@@ -30,17 +29,21 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchQuery }) => (
     }}
     fullWidth
   >
-    <TextField
-      id="search-bar"
-      className="text"
-      onChange={(e) => {
-        setSearchQuery(e.target.value);
-      }}
-      label="Search an activity"
-      variant="outlined"
-      placeholder="Search..."
-      size="small"
-    />
+    <Box display={"flex"} alignItems={"center"}>
+      <TextField
+        id="search-bar"
+        className="text"
+        onChange={(e) => {
+          setSearchQuery(e.target.value);
+        }}
+        label="Search an activity"
+        variant="outlined"
+        placeholder="Search..."
+        size="small"
+      />
+      <Box width={10} />
+      <SearchOutlined />
+    </Box>
   </FormControl>
 );
 
@@ -78,7 +81,7 @@ const SearchActivitiesView = () => {
               sx={{
                 padding: "20px",
                 marginY: "8px",
-                marginBottom: index == activities.length - 1 ? "70px" : 0,
+                marginBottom: index === activities.length - 1 ? "70px" : 0,
               }}
             >
               <Box display="flex" alignItems="center">
@@ -91,8 +94,13 @@ const SearchActivitiesView = () => {
                   </Typography>
                 </Box>
               </Box>
-              <Box width={"10px"} />
-              <Box display={"flex"} justifyContent={"space-between"}>
+              <Box height={"10px"} />
+              <Box
+                height={30}
+                display={"flex"}
+                justifyContent={"space-between"}
+                alignItems={"center"}
+              >
                 <LikeButton activity={activity} />
                 <Button
                   onClick={() => {
@@ -121,13 +129,13 @@ const LikeButton: React.FC<LikeButtonProps> = ({ activity }) => {
   const [likes, setLikes] = React.useState(activity.likes.length);
   const theme = useTheme();
   return (
-    <Box paddingLeft={"8px"} position={"relative"}>
+    <Box display={"flex"} alignItems="center">
       <Button
         sx={{
-          display: "inline-block",
-          padding: 0,
+          padding: "0px",
+          minWidth: "0px",
           minHeight: 0,
-          minWidth: 0,
+          display: "inline-block",
         }}
         onClick={() => {
           if (isSet) {
@@ -141,15 +149,8 @@ const LikeButton: React.FC<LikeButtonProps> = ({ activity }) => {
       >
         <ThumbUp color={isSet ? "primary" : "secondary"} />
       </Button>
-      <Typography
-        sx={{
-          position: "absolute",
-          top: "35%",
-          left: "75%",
-        }}
-      >
-        {likes}
-      </Typography>
+      <Box width={10}></Box>
+      <Typography>{likes}</Typography>
     </Box>
   );
 };
