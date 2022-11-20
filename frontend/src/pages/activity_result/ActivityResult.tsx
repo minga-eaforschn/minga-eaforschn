@@ -98,7 +98,7 @@ const ActivityResult: React.FC = (props) => {
         </div>
 
         <div>
-          <Typography variant="h2" sx={{ marginTop: "40px" }}>
+          <Typography variant="h4" sx={{ marginTop: "40px" }}>
             {activity.name}
           </Typography>
           <Typography variant="body2" sx={{ marginTop: "20px" }}>
