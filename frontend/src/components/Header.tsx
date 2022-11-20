@@ -3,6 +3,7 @@ import logo from "../assets/MingaEaforschnLogo.png";
 import profilePicture from "../assets/StephanLe.jpeg";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router";
+import ProfileMPBar from "./ProfileMPBar";
 
 // Speech Bubbles inspired by https://freefrontend.com/css-speech-bubbles/
 const Header = (kindlProps: { sx?: any }) => {
@@ -30,8 +31,14 @@ const Header = (kindlProps: { sx?: any }) => {
             marginRight: "10px",
           }}
         >
-          <Typography variant={"caption"} sx={{ marginRight: "3px" }}>
-            Stephan
+          <ProfileMPBar />
+          <Box width={10} />
+
+          <Typography
+            variant={"caption"}
+            sx={{ marginRight: "3px", fontSize: "1.1em" }}
+          >
+            Stephan (2)
           </Typography>
           {/* TODO make logo and avatar size more equal */}
           <Box width={10} />
