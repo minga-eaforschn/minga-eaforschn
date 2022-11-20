@@ -11,12 +11,14 @@ import {
 import React from "react";
 import {
   ActivityFragment,
+  Order_By,
   useSearchActivitiesQuery,
 } from "../../../generated/graphql";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { PlayArrow, SearchOutlined, ThumbUp } from "@mui/icons-material";
 import { useNavigate } from "react-router";
+import SortByDropdown, { SortOption } from "./SortByDropdown";
 
 interface SearchBarProps {
   setSearchQuery: (searchQuery: string) => void;
@@ -49,9 +51,27 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchQuery }) => (
 
 const SearchActivitiesView = () => {
   const [searchQuery, setSearchQuery] = React.useState("");
+
+  const [sortOption, setSortOption] = React.useState<SortOption>("most likes");
+  let likeOrderBy: Order_By | undefined = undefined;
+  let createdAtOrderBy: Order_By | undefined = undefined;
+  if (sortOption === "most likes") {
+    likeOrderBy = Order_By.Desc;
+  }
+  if (sortOption === "least likes") {
+    likeOrderBy = Order_By.Asc;
+  }
+  if (sortOption === "newest") {
+    createdAtOrderBy = Order_By.Desc;
+  }
+  if (sortOption === "oldest") {
+    createdAtOrderBy = Order_By.Asc;
+  }
   const { data, loading, error } = useSearchActivitiesQuery({
     variables: {
       query: `%${searchQuery}%`,
+      likeCount: likeOrderBy,
+      createdAt: createdAtOrderBy,
     },
   });
   const activities = data?.activity;
@@ -64,6 +84,12 @@ const SearchActivitiesView = () => {
         }}
       />
       <Box height={5} />
+      <SortByDropdown
+        sort={sortOption}
+        onSelectionChanged={(sort) => setSortOption(sort)}
+      />
+      <Box height={5} />
+
       {loading || error || activities == null ? (
         <Box>
           <CircularProgress />

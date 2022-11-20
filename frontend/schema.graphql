@@ -20,6 +20,7 @@ type activity {
         "JSON select path"
         path: String
     ): jsonb
+    created_at: timestamptz
     description: String!
     estimated_costs: float8
     estimated_duration: float8
@@ -117,6 +118,7 @@ type activity_avg_fields {
 
 "aggregate max on columns"
 type activity_max_fields {
+    created_at: timestamptz
     description: String
     estimated_costs: float8
     estimated_duration: float8
@@ -132,6 +134,7 @@ type activity_max_fields {
 
 "aggregate min on columns"
 type activity_min_fields {
+    created_at: timestamptz
     description: String
     estimated_costs: float8
     estimated_duration: float8
@@ -1891,6 +1894,8 @@ enum activity_select_column {
     "column name"
     coordinates
     "column name"
+    created_at
+    "column name"
     description
     "column name"
     estimated_costs
@@ -1942,6 +1947,8 @@ enum activity_status_update_column {
 enum activity_update_column {
     "column name"
     coordinates
+    "column name"
+    created_at
     "column name"
     description
     "column name"
@@ -2280,6 +2287,7 @@ input activity_bool_exp {
     _not: activity_bool_exp
     _or: [activity_bool_exp!]
     coordinates: jsonb_comparison_exp
+    created_at: timestamptz_comparison_exp
     description: String_comparison_exp
     estimated_costs: float8_comparison_exp
     estimated_duration: float8_comparison_exp
@@ -2324,6 +2332,7 @@ input activity_inc_input {
 "input type for inserting data into table \"activity\""
 input activity_insert_input {
     coordinates: jsonb
+    created_at: timestamptz
     description: String
     estimated_costs: float8
     estimated_duration: float8
@@ -2356,6 +2365,7 @@ input activity_on_conflict {
 "Ordering options when selecting data from \"activity\"."
 input activity_order_by {
     coordinates: order_by
+    created_at: order_by
     description: order_by
     estimated_costs: order_by
     estimated_duration: order_by
@@ -2384,6 +2394,7 @@ input activity_prepend_input {
 "input type for updating data in table \"activity\""
 input activity_set_input {
     coordinates: jsonb
+    created_at: timestamptz
     description: String
     estimated_costs: float8
     estimated_duration: float8
@@ -2478,6 +2489,7 @@ input activity_stream_cursor_input {
 "Initial value of the column from where the streaming should start"
 input activity_stream_cursor_value_input {
     coordinates: jsonb
+    created_at: timestamptz
     description: String
     estimated_costs: float8
     estimated_duration: float8

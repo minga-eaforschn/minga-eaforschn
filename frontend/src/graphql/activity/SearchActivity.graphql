@@ -1,7 +1,13 @@
-query SearchActivities($query: String!) {
+query SearchActivities($query: String!, $likeCount: order_by,$createdAt: order_by ) {
     activity(where: {
         name: {
             _ilike: $query
+        }
+    }, order_by: {
+        created_at: $createdAt,
+        likes_aggregate: {
+            count: $likeCount
+
         }
     }) {
         ...Activity

@@ -34,6 +34,7 @@ const Header = (kindlProps: { sx?: any }) => {
             Stephan
           </Typography>
           {/* TODO make logo and avatar size more equal */}
+          <Box width={10} />
           <Avatar src={profilePicture}></Avatar>
         </Box>
       </Box>

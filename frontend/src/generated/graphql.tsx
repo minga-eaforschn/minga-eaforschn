@@ -71,6 +71,7 @@ export type String_Comparison_Exp = {
 export type Activity = {
   __typename?: 'activity';
   coordinates?: Maybe<Scalars['jsonb']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
   description: Scalars['String'];
   estimated_costs?: Maybe<Scalars['float8']>;
   estimated_duration?: Maybe<Scalars['float8']>;
@@ -189,6 +190,7 @@ export type Activity_Bool_Exp = {
   _not?: InputMaybe<Activity_Bool_Exp>;
   _or?: InputMaybe<Array<Activity_Bool_Exp>>;
   coordinates?: InputMaybe<Jsonb_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
   estimated_costs?: InputMaybe<Float8_Comparison_Exp>;
   estimated_duration?: InputMaybe<Float8_Comparison_Exp>;
@@ -241,6 +243,7 @@ export type Activity_Inc_Input = {
 /** input type for inserting data into table "activity" */
 export type Activity_Insert_Input = {
   coordinates?: InputMaybe<Scalars['jsonb']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
   description?: InputMaybe<Scalars['String']>;
   estimated_costs?: InputMaybe<Scalars['float8']>;
   estimated_duration?: InputMaybe<Scalars['float8']>;
@@ -259,6 +262,7 @@ export type Activity_Insert_Input = {
 /** aggregate max on columns */
 export type Activity_Max_Fields = {
   __typename?: 'activity_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   estimated_costs?: Maybe<Scalars['float8']>;
   estimated_duration?: Maybe<Scalars['float8']>;
@@ -275,6 +279,7 @@ export type Activity_Max_Fields = {
 /** aggregate min on columns */
 export type Activity_Min_Fields = {
   __typename?: 'activity_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   estimated_costs?: Maybe<Scalars['float8']>;
   estimated_duration?: Maybe<Scalars['float8']>;
@@ -314,6 +319,7 @@ export type Activity_On_Conflict = {
 /** Ordering options when selecting data from "activity". */
 export type Activity_Order_By = {
   coordinates?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   estimated_costs?: InputMaybe<Order_By>;
   estimated_duration?: InputMaybe<Order_By>;
@@ -344,6 +350,8 @@ export enum Activity_Select_Column {
   /** column name */
   Coordinates = 'coordinates',
   /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
   Description = 'description',
   /** column name */
   EstimatedCosts = 'estimated_costs',
@@ -370,6 +378,7 @@ export enum Activity_Select_Column {
 /** input type for updating data in table "activity" */
 export type Activity_Set_Input = {
   coordinates?: InputMaybe<Scalars['jsonb']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
   description?: InputMaybe<Scalars['String']>;
   estimated_costs?: InputMaybe<Scalars['float8']>;
   estimated_duration?: InputMaybe<Scalars['float8']>;
@@ -567,6 +576,7 @@ export type Activity_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type Activity_Stream_Cursor_Value_Input = {
   coordinates?: InputMaybe<Scalars['jsonb']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
   description?: InputMaybe<Scalars['String']>;
   estimated_costs?: InputMaybe<Scalars['float8']>;
   estimated_duration?: InputMaybe<Scalars['float8']>;
@@ -594,6 +604,8 @@ export type Activity_Sum_Fields = {
 export enum Activity_Update_Column {
   /** column name */
   Coordinates = 'coordinates',
+  /** column name */
+  CreatedAt = 'created_at',
   /** column name */
   Description = 'description',
   /** column name */
@@ -3855,6 +3867,8 @@ export type GetUserActivitiesQuery = { __typename?: 'query_root', user_activity:
 
 export type SearchActivitiesQueryVariables = Exact<{
   query: Scalars['String'];
+  likeCount?: InputMaybe<Order_By>;
+  createdAt?: InputMaybe<Order_By>;
 }>;
 
 
@@ -4001,8 +4015,11 @@ export type GetUserActivitiesQueryHookResult = ReturnType<typeof useGetUserActiv
 export type GetUserActivitiesLazyQueryHookResult = ReturnType<typeof useGetUserActivitiesLazyQuery>;
 export type GetUserActivitiesQueryResult = Apollo.QueryResult<GetUserActivitiesQuery, GetUserActivitiesQueryVariables>;
 export const SearchActivitiesDocument = gql`
-    query SearchActivities($query: String!) {
-  activity(where: {name: {_ilike: $query}}) {
+    query SearchActivities($query: String!, $likeCount: order_by, $createdAt: order_by) {
+  activity(
+    where: {name: {_ilike: $query}}
+    order_by: {created_at: $createdAt, likes_aggregate: {count: $likeCount}}
+  ) {
     ...Activity
   }
 }
@@ -4021,6 +4038,8 @@ export const SearchActivitiesDocument = gql`
  * const { data, loading, error } = useSearchActivitiesQuery({
  *   variables: {
  *      query: // value for 'query'
+ *      likeCount: // value for 'likeCount'
+ *      createdAt: // value for 'createdAt'
  *   },
  * });
  */
