@@ -4,10 +4,7 @@ import {
   concat,
   HttpLink,
   InMemoryCache,
-  split,
 } from "@apollo/client";
-import { WebSocketLink } from "@apollo/client/link/ws";
-import { getMainDefinition } from "@apollo/client/utilities";
 
 function loadHeaders() {
   return { "x-hasura-admin-secret": "myadminsecretkey" };
@@ -17,6 +14,7 @@ const httpUri = `https://api.stephan.vm.selectcode.io/v1/graphql`;
 
 const httpLink = new HttpLink({
   uri: httpUri,
+  headers: loadHeaders(),
 });
 
 const errorLink = new ApolloLink((operation, forward) => {
@@ -32,22 +30,7 @@ const errorLink = new ApolloLink((operation, forward) => {
   });
 });
 
-const splitLink = split(({ query }) => {
-  const definition = getMainDefinition(query);
-  return (
-    definition.kind === "OperationDefinition" &&
-    definition.operation === "subscription"
-  );
-}, concat(errorLink, httpLink));
-
-const authMiddleware = new ApolloLink((operation, forward) => {
-  operation.setContext({
-    headers: loadHeaders(),
-  });
-  return forward(operation);
-});
-
 export const client = new ApolloClient({
-  link: concat(authMiddleware, splitLink),
+  link: concat(errorLink, httpLink),
   cache: new InMemoryCache(),
 });
