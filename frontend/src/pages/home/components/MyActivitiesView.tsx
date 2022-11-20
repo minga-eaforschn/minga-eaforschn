@@ -64,6 +64,16 @@ const MyActivitiesView = () => {
   const height = window.innerHeight;
   const [showConfetti, setShowConfetti] = React.useState(false);
 
+  // console.log(showConfetti);
+  //
+  // document.addEventListener("completed", function (e) {
+  //   console.log(e);
+  //   console.log("now");
+  //   setShowConfetti(true);
+  //   console.log(showConfetti);
+  //   console.log("over");
+  // });
+
   return (
     <Box>
       <AppBar
@@ -163,7 +173,7 @@ const MyActivitiesView = () => {
           </List>
         )}
       </Box>
-      {showConfetti && <Confetti width={width} height={height} />})
+      {/*{showConfetti && <Confetti width={width} height={height} />})*/}
     </Box>
   );
 };

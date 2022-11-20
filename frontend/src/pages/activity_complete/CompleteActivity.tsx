@@ -78,6 +78,9 @@ const CompleteActivity = () => {
           <Box width={"10px"} />
           <Button
             onClick={async () => {
+              // const event = new Event("completed");
+              // document.dispatchEvent(event);
+
               navigate("/home/activities", {
                 replace: true,
               });
